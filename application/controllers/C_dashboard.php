@@ -7,21 +7,17 @@ class C_dashboard extends MY_Controller
   public function __construct()
   {
     parent::__construct();
-
-    $this->load->model('m_setting_db_supplier_coa');
-    $this->load->model('m_setting_db_bank_coa');
-    $this->load->model('m_t_ak_faktur_penjualan');
-    $this->load->model('m_t_t_a_penjualan_pks');
+    $this->load->model('m_t_t_t_penjualan_rincian');
   }
-
 
   public function index()
   {
     $data = [
-      "c_setting_db_bank_coa" => $this->m_setting_db_bank_coa->select('2021-01-01','2100-01-01'),
-      "c_setting_db_supplier_coa" => $this->m_setting_db_supplier_coa->select('2021-01-01','2100-01-01'),
-      "select_no_faktur" => $this->m_t_ak_faktur_penjualan->select_no_faktur(),
-      "pengiriman_select" => $this->m_t_t_a_penjualan_pks->select_sum_in_date($this->session->userdata('date_from_dashboard'),$this->session->userdata('date_to_dashboard')),
+      "select_rekap_pelanggan" => $this->m_t_t_t_penjualan_rincian->select_rekap_pelanggan($this->session->userdata('date_from_dashboard_1'),$this->session->userdata('date_to_dashboard_1')),
+
+      "select_rekap_sales" => $this->m_t_t_t_penjualan_rincian->select_rekap_sales($this->session->userdata('date_from_dashboard_2'),$this->session->userdata('date_to_dashboard_2')),
+
+
       "title" => "Dashboard",
       "description" => "Web Version:21-01-26 22:11"
     ];
@@ -29,14 +25,28 @@ class C_dashboard extends MY_Controller
     $this->render_backend('template/backend/pages/dashboard', $data);
   }
 
-  public function search_date()
+  public function search_date_1()
   {
-    $date_from_dashboard = ($this->input->post("date_from_dashboard"));
-    $this->session->set_userdata('date_from_dashboard', $date_from_dashboard);
+    $date_from_dashboard_1 = ($this->input->post("date_from_dashboard_1"));
+    $this->session->set_userdata('date_from_dashboard_1', $date_from_dashboard_1);
 
-    $date_to_dashboard = ($this->input->post("date_to_dashboard"));
-    $this->session->set_userdata('date_to_dashboard', $date_to_dashboard);
+    $date_to_dashboard_1 = ($this->input->post("date_to_dashboard_1"));
+    $this->session->set_userdata('date_to_dashboard_1', $date_to_dashboard_1);
     redirect('/c_dashboard');
   }
+
+
+
+  public function search_date_2()
+  {
+    $date_from_dashboard_2 = ($this->input->post("date_from_dashboard_2"));
+    $this->session->set_userdata('date_from_dashboard_2', $date_from_dashboard_2);
+
+    $date_to_dashboard_2 = ($this->input->post("date_to_dashboard_2"));
+    $this->session->set_userdata('date_to_dashboard_2', $date_to_dashboard_2);
+    redirect('/c_dashboard');
+  }
+
+
 
 }

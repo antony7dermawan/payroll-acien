@@ -1,16 +1,109 @@
 <div class="card">
   <div class="card-header">
-    <form action='<?php echo base_url("c_t_ak_jurnal_history/search_date"); ?>' class='no_voucer_area' method="post" id=''>
+    
 
       <label>Pilih Laporan:</label>
 
-      <select name="pilih_laporan" class='custom_width' id='id_pilih_laporan' placeholder='Pick a state...'>
+      <select name="pilih_laporan" class='pilih_laporan' id='id_pilih_laporan' placeholder='Pick a state...'>
         <?php
-        echo "<option value='laporan_excel/lap_cash_flow/index/' >Laporan Cash Flow</option>";
-        echo "<option value='laporan_excel/lap_laba_rugi/index/' >Laporan Laba Rugi</option>";
-        echo "<option value='laporan_excel/lap_po/index/' >Laporan PO</option>";
+        echo "<option value='laporan_excel/lap_beli/index/' >Laporan Pembelian</option>";
+
+        echo "<option value='laporan_excel/lap_rb/index/' >Laporan Retur Pembelian</option>";
+
+        echo "<option value='laporan_excel/lap_beli_kredit/index/' >Laporan Pembelian (Hanya Kredit)</option>";
+
+
+
+
+
+        echo "<option value='laporan_excel/lap_jual/index/' >Laporan Penjualan</option>";
+
+        echo "<option value='laporan_excel/lap_rj/index/' >Laporan Retur Penjualan</option>";
+        
+        echo "<option value='laporan_excel/lap_jual_kredit/index/' >Laporan Penjualan (Hanya Kredit)</option>";
+
+        
+
+        echo "<option value='laporan_excel/lap_flow_barang_per_item/index/' >Laporan Flow Barang (per Item)</option>";
+        echo "<option value='laporan_excel/lap_flow_barang_per_kategori/index/' >Laporan Flow Barang (per Kategori)</option>";
+        echo "<option value='laporan_excel/lap_ranking_sales/index/' >Laporan Ranking Sales</option>";
+        echo "<option value='laporan_excel/lap_ranking_pelanggan/index/' >Laporan Ranking Pelanggan</option>";
+
+
+        echo "<option value='laporan_excel/lap_penjualan_per_sales/index/' >Laporan Penjualan Per Sales</option>";
+
+
+        echo "<option value='laporan_excel/lap_penjualan_per_pelanggan/index/' >Laporan Penjualan Per Pelanggan</option>";
+
+
         ?>
       </select>
+
+      <div class='barang' id='barang'>
+        <label>Kode Barang</label>
+            <select name="barang_id" class='barang_id' id='barang_id' placeholder='Pick a state...'>
+              
+              <?php
+              foreach ($c_t_m_d_barang as $key => $value) 
+              {
+                echo "<option value='".$value->BARANG_ID."'>".$value->KODE_BARANG."/".$value->BARANG."/".$value->MERK_BARANG."/".$value->PART_NUMBER."</option>";
+
+              }
+              ?>
+            </select>
+      </div>
+
+      <div class='kategori' id='kategori'>
+        <label>Pilih Kategori</label>
+            <select name="kategori_id" class='' id='kategori_id' placeholder='Pick a state...'>
+            
+            <?php
+            foreach ($c_t_m_d_kategori as $key => $value) 
+            {
+                    if($this->session->userdata('master_barang_kategori_id')==$value->ID)
+                    {
+                      echo "<option value='".$value->ID."' selected>".$value->KATEGORI."</option>";
+                    }
+                    else
+                    {
+                      echo "<option value='".$value->ID."'>".$value->KATEGORI."</option>";
+                    }
+                    
+
+            }
+            ?>
+          </select>
+      </div>
+
+      <div class='sales' id='sales'>
+        <label>Pilih Sales</label>
+            <select name="sales_id" class='' id='sales_id' placeholder='Pick a state...'>
+            
+            <?php
+            foreach ($c_t_m_d_sales as $key => $value) 
+            {
+              echo "<option value='".$value->ID."'>".$value->SALES."</option>";
+            }
+            ?>
+          </select>
+      </div>
+
+
+      <div class='pelanggan' id='pelanggan'>
+        <label>Pilih Pelanggan</label>
+            <select name="pelanggan_id" class='' id='pelanggan_id' placeholder='Pick a state...'>
+            
+            <?php
+            foreach ($c_t_m_d_pelanggan as $key => $value) 
+            {
+              echo "<option value='".$value->ID."'>".$value->PELANGGAN."</option>";
+            }
+            ?>
+          </select>
+      </div>
+
+
+
       <table>
         <tr>
           <th>Periode:</th>
@@ -32,7 +125,7 @@
       </table>
 
 
-    </form>
+    
   </div>
 
 </div>
@@ -45,15 +138,84 @@
 
 
 
+<script type="text/javascript">
+
+$(document).ready(function()
+{
+  $(".pilih_laporan").change(function()
+  {
+    var pilih_laporan=$(this).val();
+    console.log(pilih_laporan);
+    
+    if(pilih_laporan=="laporan_excel/lap_flow_barang_per_item/index/")
+    {
+      document.getElementById('barang').style.display = 'block';
+      document.getElementById('kategori').style.display = 'none';
+
+      document.getElementById('sales').style.display = 'none';
+      document.getElementById('pelanggan').style.display = 'none';
+    }
+
+    else if(pilih_laporan=="laporan_excel/lap_flow_barang_per_kategori/index/")
+    {
+      document.getElementById('barang').style.display = 'none';
+      document.getElementById('kategori').style.display = 'block';
+
+      document.getElementById('sales').style.display = 'none';
+      document.getElementById('pelanggan').style.display = 'none';
+    }
+
+
+    else if(pilih_laporan=="laporan_excel/lap_penjualan_per_sales/index/")
+    {
+      document.getElementById('barang').style.display = 'none';
+      document.getElementById('kategori').style.display = 'none';
+
+      document.getElementById('sales').style.display = 'block';
+      document.getElementById('pelanggan').style.display = 'none';
+    }
+
+    else if(pilih_laporan=="laporan_excel/lap_penjualan_per_pelanggan/index/")
+    {
+      document.getElementById('barang').style.display = 'none';
+      document.getElementById('kategori').style.display = 'none';
+
+      document.getElementById('sales').style.display = 'none';
+      document.getElementById('pelanggan').style.display = 'block';
+    }
+
+
+    else
+    {
+      document.getElementById('barang').style.display = 'none';
+      document.getElementById('kategori').style.display = 'none';
+
+      document.getElementById('sales').style.display = 'none';
+      document.getElementById('pelanggan').style.display = 'none';
+    }
+    
+  });
+
+
+});
+
+
+
+</script>
+
 
 <script type="text/javascript">
   function call_download() {
     var link_1 = document.getElementById("id_pilih_laporan").value;
     var link_2 = document.getElementById("date_from_laporan").value;
     var link_3 = document.getElementById("date_to_laporan").value;
+    var link_4 = parseInt(document.getElementById("barang_id").value);
+    var link_5 = parseInt(document.getElementById("kategori_id").value);
+    var link_6 = parseInt(document.getElementById("sales_id").value);
+    var link_7 = parseInt(document.getElementById("pelanggan_id").value);
     var slash = "/";
 
-    var link = link_1.concat(link_2, slash, link_3);
+    var link = link_1.concat(link_2, slash, link_3, slash, link_4, slash, link_5,slash, link_6,slash, link_7);
     window.open(link);
   }
 </script>
@@ -84,8 +246,24 @@
     color: white;
   }
 
+.barang
+{
+  display: none;
+}
 
+.kategori
+{
+  display: none;
+}
 
+.sales
+{
+  display: none;
+}
+.pelanggan
+{
+  display: none;
+}
 
   .searchable input {
     width: 100%;

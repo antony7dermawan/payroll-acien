@@ -3,16 +3,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class C_laporan extends MY_Controller {
 
-	  public function __construct()
-  {
-    parent::__construct();
+	public function __construct()
+	{
+	    parent::__construct();
+	    $this->load->model('m_t_m_d_barang');
+    	$this->load->model('m_t_m_d_kategori');
 
-    $this->load->model('m_laporan');
-  }
+    	$this->load->model('m_t_m_d_sales');
+    	$this->load->model('m_t_m_d_pelanggan');
+	}
 
 	public function index(){
+
+
+		$this->session->set_userdata('t_m_d_supplier_delete_logic', '0');
+
+		$this->session->set_userdata('t_m_d_pelanggan_delete_logic', '0');
+
+
+		$this->session->set_userdata('t_m_d_barang_delete_logic', '0');
+
+		$this->session->set_userdata('t_m_d_kategori_delete_logic', '0');
+
+		$this->session->set_userdata('master_barang_kategori_id', '0');
+
+		$this->session->set_userdata('master_barang_company_id', $this->session->userdata('company_id'));
+
+		
+
 		$data = [
-			
+			"c_t_m_d_barang" => $this->m_t_m_d_barang->select(),
+			"c_t_m_d_kategori" => $this->m_t_m_d_kategori->select(),
+			"c_t_m_d_pelanggan" => $this->m_t_m_d_pelanggan->select(),
+			"c_t_m_d_sales" => $this->m_t_m_d_sales->select(),
 			"title" => "Laporan",
 			"description" => "Pilih Detail"
 		  ];

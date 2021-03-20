@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '18.216.115.189',
-	'username' => 'antony',
-	'password' => 'DZ}LPb^u7X<P3E@{',
-	'database' => 'ptjo',
+	'hostname' => 'localhost',
+	'username' => 'postgres',
+	'password' => '123',
+	'database' => 'offline_inventory_jaya_abadi',
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

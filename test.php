@@ -1,15 +1,47 @@
+<html>
+<head>
+<title>Dynamic Dependent Select Box using jQuery and Ajax</title>
+</head>
+<body>
+<div>
+<label>Country :</label><select name="country" class="country">
+<option value="0">Select Country</option>
 <?php
+include('db.php');
+$sql = mysqli_query($con,"SELECT * FROM country");
+while($row=mysqli_fetch_array($sql))
+{
+echo '<option value="'.$row['country_id'].'">'.$row['country_name'].'</option>';
+} ?>
+</select><br/><br/>
+<label>City :</label><select name="city" class="city">
+<option>Select City</option>
+</select>
 
-$date_from_laporan = '2020-12-26';
-$date_to_laporan = '2021-01-25';
-$total_day=intval(((round(abs(strtotime($date_from_laporan) - strtotime($date_to_laporan)) / (60*60*24),0))+1)/2);
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+</script>
+<script type="text/javascript">
+$(document).ready(function()
+{
+$(".country").change(function()
+{
+var country_id=$(this).val();
+var post_id = 'id='+ country_id;
 
+$.ajax
+({
+type: "POST",
+url: "ajax.php",
+data: post_id,
+cache: false,
+success: function(cities)
+{
+$(".city").html(cities);
+} 
+});
 
-$date=date_create($date_from_laporan);
-date_add($date,date_interval_create_from_date_string("{$total_day} days"));
-echo intval(date_format($date,"m"));
-
-        
-
-
-?>
+});
+});
+</script>
+</body>
+</html>

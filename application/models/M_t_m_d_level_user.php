@@ -2,11 +2,7 @@
 
 class M_t_m_d_level_user extends CI_Model {
     
-    public function get($username){
-        $this->db->where('USERNAME', $username); // Untuk menambahkan Where Clause : username='$username'
-        $result = $this->db->get('T_M_D_LEVEL_USER')->row(); // Untuk mengeksekusi dan mengambil data hasil query
-        return $result;
-    }
+  
 
 public function update($data, $id)
 {
@@ -27,11 +23,15 @@ public function select_id($id)
 
 
 
-
   public function select()
   {
     $this->db->select('*');
     $this->db->from('T_M_D_LEVEL_USER');
+
+    if($this->session->userdata('t_m_d_level_user_delete_logic')==0)
+    {
+      $this->db->where('MARK_FOR_DELETE',FALSE);
+    }
     $this->db->order_by("ID", "asc");
     $akun = $this->db->get ();
     return $akun->result ();

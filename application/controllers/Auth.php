@@ -29,7 +29,6 @@ class Auth extends MY_Controller {
     }else{
       if($password == $user->PASSWORD){ // Jika password yang diinput sama dengan password yang didatabase
         $session = array(
-          'taik' => 'bidin', // echo $this->session->userdata('taik') 
           'authenticated'=>true, // Buat session authenticated dengan value true
           'username'=>$user->USERNAME,  // Buat session username
           'name'=>$user->NAME, // Buat session nama
@@ -37,11 +36,27 @@ class Auth extends MY_Controller {
                     'password'=>$user->PASSWORD, // Buat session nama
           'level_user_id'=>$user->LEVEL_USER_ID, // Buat session role
           'company_id'=>$user->COMPANY_ID,
-          'area_id'=>$user->AREA_ID,
+          'master_barang_kategori_id'=>0,
+          'master_barang_company_id'=>1,
+          'date_pembelian'=>date('Y-m-d'),
+          'date_penjualan'=>date('Y-m-d'),
+          'date_retur_pembelian'=>date('Y-m-d'),
+          'date_retur_penjualan'=>date('Y-m-d'),
+          'date_from_dashboard_1'=>date('Y-m-d'),
+          'date_to_dashboard_1'=>date('Y-m-d'),
+          'date_from_dashboard_2'=>date('Y-m-d'),
+          'date_to_dashboard_2'=>date('Y-m-d'),
+          'date_po_auto'=>date('Y-m-d'),
+          'date_po_manual'=>date('Y-m-d'),
+          
+
+
+
+
+          //old
           'now_no_voucer'=>'',
-          'date_from_select_penjualan'=>date('Y-m-d'),
-          'date_to_select_penjualan'=>date('Y-m-d'),
-          'date_penjualan_pks'=>date('Y-m-d'),
+          
+          
           'date_faktur_penjualan'=>date('Y-m-d'),
           'date_terima_pelanggan'=>date('Y-m-d'),
           'date_from_select_jurnal'=>date('Y-m-d'),
