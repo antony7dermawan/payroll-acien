@@ -15,7 +15,7 @@
 
 <?php
 $level_user_id = $this->session->userdata('level_user_id');
-if($level_user_id==1 or $level_user_id==6)
+if($level_user_id==1)
 {
     ?>
     
@@ -96,12 +96,31 @@ if($level_user_id==1 or $level_user_id==6)
 
         </ul>
     </li>
+
+
+<?php
+
+}
+
+?>
+
+
+
+
     <li class="pcoded-hasmenu">
         <a href="javascript:void(0)" class="waves-effect waves-dark">
             <span class="pcoded-micon"><i class="feather icon-list"></i></span>
             <span class="pcoded-mtext">Transaksi</span>
         </a>
         <ul class="pcoded-submenu">
+
+
+            <?php
+
+            if($level_user_id==1 or $level_user_id==2 or $level_user_id==3)
+            {
+
+            ?>
             <li class="">
                 <a href="<?= base_url("c_t_t_t_pembelian"); ?>" class="submenu waves-effect waves-dark">
                     <span class="pcoded-mtext">Pembelian</span>
@@ -114,19 +133,7 @@ if($level_user_id==1 or $level_user_id==6)
                     <span class="pcoded-mtext">Retur Pembelian</span>
                 </a>
             </li>
-            
 
-            <li class="">
-                <a href="<?= base_url("c_t_t_t_penjualan"); ?>" class="submenu waves-effect waves-dark">
-                    <span class="pcoded-mtext">Penjualan</span>
-                </a>
-            </li>
-
-            <li class="">
-                <a href="<?= base_url("c_t_t_t_retur_penjualan"); ?>" class="submenu waves-effect waves-dark">
-                    <span class="pcoded-mtext">Retur Penjualan</span>
-                </a>
-            </li>
 
             <li class="">
                 <a href="<?= base_url("c_t_t_t_po_auto"); ?>" class="submenu waves-effect waves-dark">
@@ -139,6 +146,37 @@ if($level_user_id==1 or $level_user_id==6)
                     <span class="pcoded-mtext">PO Manual</span>
                 </a>
             </li>
+            
+
+
+            <?php
+            }
+            if($level_user_id==1 or $level_user_id==2 or $level_user_id==4)
+            {
+
+            ?>
+            <li class="">
+                <a href="<?= base_url("c_t_t_t_penjualan"); ?>" class="submenu waves-effect waves-dark">
+                    <span class="pcoded-mtext">Penjualan</span>
+                </a>
+            </li>
+
+            <li class="">
+                <a href="<?= base_url("c_t_t_t_retur_penjualan"); ?>" class="submenu waves-effect waves-dark">
+                    <span class="pcoded-mtext">Retur Penjualan</span>
+                </a>
+            </li>
+
+
+            <?php
+            }
+            
+
+            ?>
+
+
+
+            
 
 
             <li class="">
@@ -152,6 +190,10 @@ if($level_user_id==1 or $level_user_id==6)
 
         </ul>
     </li>
+
+
+
+
 
     <?php
 }
@@ -189,7 +231,7 @@ if($level_user_id==1)
 
 
 <?php
-if($level_user_id==1 or $level_user_id==6)
+if($level_user_id==1 )
 {
     ?>
     <li class="pcoded-hasmenu">

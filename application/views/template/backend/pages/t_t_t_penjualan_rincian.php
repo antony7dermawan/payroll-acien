@@ -329,6 +329,7 @@ document.getElementById("harga_jual_id").value= reading_feedback_1;
 
 
 
+
 $.ajax
 ({
 type: "POST",
