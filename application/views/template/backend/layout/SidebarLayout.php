@@ -195,10 +195,6 @@ if($level_user_id==1)
 
 
 
-    <?php
-}
-?>
-
 
 
 
