@@ -100,7 +100,9 @@ class C_t_t_t_po_manual extends MY_Controller
       $inv_pinlok = $value->INV_PINLOK;
     }
 
-    $live_inv = $inv_po.date('y').sprintf('%010d', $inv_int);
+
+
+    $live_inv = $inv_po.date('y-m').'.'.sprintf('%05d', $inv_int);
 
     $date_po_manual = $date;
     $this->session->set_userdata('date_po_manual', $date_po_manual);

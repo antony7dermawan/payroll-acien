@@ -75,18 +75,35 @@
                 }
                 if ($value->PRINTED == 't') {
                   echo "> <i class='fa fa-print text-c-green'></i></a> ";
-                  if($this->session->userdata('level_user_id')==1)
-                  {
-                    echo "<a href='" . site_url('c_t_ak_terima_pelanggan/undo/' . $value->ID) . "' ";
-                    echo "onclick=\"return confirm('Apakah kamu yakin ingin memperbaiki data ini?')\"";
-                    echo "> <i class='fa fa-refresh f-w-600 f-16 text-c-red'></i></a>";
-                  }
+                  
                 }
 
                 echo "<script>";
                 echo "function p_1_" . $key . "()";
                 echo "{";
                 echo "window.open('laporan_pdf/c_t_t_t_penjualan_print/index/" . $value->ID . "');";
+                echo "}";
+                echo "</script>";
+
+
+
+
+
+                echo "<a "; #/1 ini artinya kena pajak
+
+                echo "onclick= 'p_2_" . $key . "()'";
+                if ($value->PRINTED == 'f') {
+                  echo "> <i class='fa fa-print text-c-blue'></i></a> ";
+                }
+                if ($value->PRINTED == 't') {
+                  echo "> <i class='fa fa-print text-c-green'></i></a> ";
+                  
+                }
+
+                echo "<script>";
+                echo "function p_2_" . $key . "()";
+                echo "{";
+                echo "window.open('laporan_pdf/c_t_t_t_penjualan2_print/index/" . $value->ID . "');";
                 echo "}";
                 echo "</script>";
               }

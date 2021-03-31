@@ -12,7 +12,7 @@ public function update($data, $id)
 
 public function select_id($id)
 {
-  $this->db->select('LEVEL_USER_ID');
+  $this->db->select('ID');
   $this->db->from('T_M_D_LEVEL_USER');
   $this->db->where('LEVEL_USER', $id);
   $akun = $this->db->get ();

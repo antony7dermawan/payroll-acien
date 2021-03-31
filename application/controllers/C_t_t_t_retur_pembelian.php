@@ -94,7 +94,9 @@ class C_t_t_t_retur_pembelian extends MY_Controller
       $inv_pinlok = $value->INV_PINLOK;
     }
 
-    $live_inv = $inv_retur_pembelian.date('y').sprintf('%010d', $inv_int);
+
+
+    $live_inv = $inv_retur_pembelian.date('y-m').'.'.sprintf('%05d', $inv_int);
 
     $date_retur_pembelian = $date;
     $this->session->set_userdata('date_retur_pembelian', $date_retur_pembelian);

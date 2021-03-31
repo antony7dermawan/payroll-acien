@@ -3,7 +3,7 @@
     <form action='<?php echo base_url("c_t_t_t_po_manual/date_po_manual"); ?>' class='no_voucer_area' method="post" id=''>
       <h5>
       <?php
-      
+      $level_user_id = $this->session->userdata('level_user_id');
       foreach ($c_t_t_t_po_manual_by_id as $key => $value) {
         $inv = $value->INV;
         $t_status = $value->T_STATUS;
@@ -197,7 +197,11 @@
 
 
 
-        <div class="form-group">
+        <?php
+        if($level_user_id==1)
+        {
+        ?>
+        <div class="history_pembelian">
             <label>History Pembelian</label>
             <table name="" class="table table-xs">
               <thead>
@@ -213,6 +217,15 @@
               </tbody>
             </table>
         </div>
+        <style type="text/css">
+          .history_pembelian
+          {
+            overflow: scroll;
+          }
+        </style>
+        <?php
+        }
+        ?>
 
 
 

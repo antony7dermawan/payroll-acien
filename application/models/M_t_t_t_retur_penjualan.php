@@ -68,7 +68,7 @@ public function select_range_date($from_date,$to_date)
     $this->db->join('T_M_D_LOKASI', 'T_M_D_LOKASI.ID = T_T_T_PENJUALAN.LOKASI_ID', 'left');
     
 
-    $this->db->join("(select \"RETUR_PENJUALAN_ID\",sum(\"SUB_TOTAL\")\"SUM_SUB_TOTAL\" from \"T_T_T_RETUR_PENJUALAN_RINCIAN\" group by \"RETUR_PENJUALAN_ID\") as t_sum_1", 'T_T_T_RETUR_PENJUALAN.ID = t_sum_1.RETUR_PENJUALAN_ID', 'left');
+    $this->db->join("(select \"RETUR_PENJUALAN_ID\",sum(\"SUB_TOTAL\")\"SUM_SUB_TOTAL\" from \"T_T_T_RETUR_PENJUALAN_RINCIAN\" where \"MARK_FOR_DELETE\"=false group by \"RETUR_PENJUALAN_ID\") as t_sum_1", 'T_T_T_RETUR_PENJUALAN.ID = t_sum_1.RETUR_PENJUALAN_ID', 'left');
 
   
     if($this->session->userdata('t_t_t_retur_penjualan_delete_logic')==0)
@@ -117,7 +117,7 @@ public function select_range_date($from_date,$to_date)
     $this->db->join('T_T_T_PENJUALAN', 'T_T_T_PENJUALAN.ID = T_T_T_RETUR_PENJUALAN.PENJUALAN_ID', 'left');
 
 
-    $this->db->join("(select \"RETUR_PENJUALAN_ID\",sum(\"SUB_TOTAL\")\"SUM_SUB_TOTAL\" from \"T_T_T_RETUR_PENJUALAN_RINCIAN\" group by \"RETUR_PENJUALAN_ID\") as t_sum_1", 'T_T_T_RETUR_PENJUALAN.ID = t_sum_1.RETUR_PENJUALAN_ID', 'left');
+    $this->db->join("(select \"RETUR_PENJUALAN_ID\",sum(\"SUB_TOTAL\")\"SUM_SUB_TOTAL\" from \"T_T_T_RETUR_PENJUALAN_RINCIAN\" where \"MARK_FOR_DELETE\"=false group by \"RETUR_PENJUALAN_ID\") as t_sum_1", 'T_T_T_RETUR_PENJUALAN.ID = t_sum_1.RETUR_PENJUALAN_ID', 'left');
 
   
     $date_before = date('Y-m-d',(strtotime ( '-30 day' , strtotime ( $date_retur_penjualan) ) ));
@@ -199,7 +199,7 @@ public function select_range_date($from_date,$to_date)
 
   public function select_inv_int()
   {
-    $this_year = date('Y').'-01-01';
+    $this_year = date('Y-m').'-01';
     $this->db->limit(1);
     $this->db->select("INV_INT");
     $this->db->from('T_T_T_RETUR_PENJUALAN');

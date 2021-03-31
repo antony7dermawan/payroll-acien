@@ -123,7 +123,7 @@ class C_t_t_t_penjualan extends MY_Controller
       $inv_pinlok = $value->INV_PINLOK;
     }
 
-    $live_inv = $inv_penjualan.date('y').sprintf('%010d', $inv_int);
+    $live_inv = $inv_penjualan.date('y-m').'.'.sprintf('%05d', $inv_int);
 
     $date_penjualan = $date;
     $this->session->set_userdata('date_penjualan', $date_penjualan);

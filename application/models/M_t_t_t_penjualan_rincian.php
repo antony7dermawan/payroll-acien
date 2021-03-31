@@ -50,6 +50,8 @@ public function update($data, $id)
 
     $this->db->join('T_M_D_SATUAN', 'T_M_D_BARANG.SATUAN_ID = T_M_D_SATUAN.ID', 'left');
 
+    
+    $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
 
 
     if($this->session->userdata('t_t_t_penjualan_delete_logic')==0)
@@ -124,7 +126,7 @@ public function select_qty_before_date($limit_date,$barang_id)
 
     $this->db->join('T_M_D_BARANG', 'T_M_D_BARANG.BARANG_ID = T_T_T_PENJUALAN_RINCIAN.BARANG_ID', 'left');
 
-
+    $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
 
     
     $this->db->where('T_T_T_PENJUALAN_RINCIAN.ID',$id);
@@ -228,7 +230,7 @@ public function select_qty_before_date($limit_date,$barang_id)
 
     $this->db->join('T_M_D_BARANG', 'T_M_D_BARANG.BARANG_ID = T_T_T_PEMBELIAN_RINCIAN.BARANG_ID', 'left');
 
-
+    $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
 
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.MARK_FOR_DELETE',FALSE);
     $this->db->where('T_T_T_PENJUALAN.ID',$retur_pembelian_id);
@@ -270,6 +272,8 @@ public function select_qty_before_date($limit_date,$barang_id)
 
     $this->db->join('T_M_D_BARANG', 'T_M_D_BARANG.BARANG_ID = T_T_T_PEMBELIAN_RINCIAN.BARANG_ID', 'left');
 
+
+    $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
 
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.BARANG_ID',$barang_id);
     

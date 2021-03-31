@@ -3,7 +3,13 @@
    
       <h5>
       <?php
-      
+      $level_user_id = $this->session->userdata('level_user_id');
+
+      $disable_harga_jual = 'disabled';
+      if($level_user_id==1)
+      {
+        $disable_harga_jual = '';
+      }
       foreach ($c_t_t_t_penjualan_by_id as $key => $value) {
         $inv = $value->INV;
       }
@@ -180,7 +186,7 @@
           <div class="col-md-6">
             <fieldset class="form-group">
               <label>Harga Jual</label>
-              <input type='text' class='form-control' placeholder='' id='harga_jual_id' name='harga_jual' disabled>
+              <input type='text' class='form-control' placeholder='' id='harga_jual_id' name='harga_jual' <?=$disable_harga_jual ?>>
             </fieldset>
             
 
@@ -241,7 +247,11 @@
 
 
 
-        <div class="form-group">
+        <?php
+        if($level_user_id==1)
+        {
+        ?>
+        <div class="history_pembelian">
             <label>History Pembelian</label>
             <table name="" class="table table-xs">
               <thead>
@@ -252,12 +262,20 @@
                   <th>Tanggal</th>
                 </tr>
               </thead>
-              
               <tbody class="return_data">
                 
               </tbody>
             </table>
         </div>
+        <style type="text/css">
+          .history_pembelian
+          {
+            overflow: scroll;
+          }
+        </style>
+        <?php
+        }
+        ?>
 
 
 

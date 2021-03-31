@@ -53,6 +53,8 @@ public function select_range_date($from_date,$to_date,$barang_id,$kategori_id)
         $this->db->where("T_M_D_BARANG.KATEGORI_ID='{$kategori_id}'");
     }
 
+
+    $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
     $this->db->where("T_T_T_PEMBELIAN.COMPANY_ID={$this->session->userdata('company_id')}");
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.MARK_FOR_DELETE',FALSE);
 
@@ -106,6 +108,7 @@ public function select_range_date($from_date,$to_date,$barang_id,$kategori_id)
         $this->db->where("T_M_D_BARANG.KATEGORI_ID='{$kategori_id}'");
     }
 
+    $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
     $this->db->where("T_T_T_RETUR_PEMBELIAN.COMPANY_ID={$this->session->userdata('company_id')}");
     $this->db->where('T_T_T_RETUR_PEMBELIAN_RINCIAN.MARK_FOR_DELETE',FALSE);
 
@@ -169,6 +172,7 @@ public function select_range_date($from_date,$to_date,$barang_id,$kategori_id)
         $this->db->where("T_M_D_BARANG.KATEGORI_ID='{$kategori_id}'");
     }
 
+    $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
     $this->db->where("T_T_T_PENJUALAN.COMPANY_ID={$this->session->userdata('company_id')}");
     $this->db->where('T_T_T_PENJUALAN_RINCIAN.MARK_FOR_DELETE',FALSE);
 
@@ -229,6 +233,7 @@ public function select_range_date($from_date,$to_date,$barang_id,$kategori_id)
         $this->db->where("T_M_D_BARANG.KATEGORI_ID='{$kategori_id}'");
     }
 
+    $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
     $this->db->where("T_T_T_RETUR_PENJUALAN.COMPANY_ID={$this->session->userdata('company_id')}");
     $this->db->where('T_T_T_RETUR_PENJUALAN_RINCIAN.MARK_FOR_DELETE',FALSE);
 

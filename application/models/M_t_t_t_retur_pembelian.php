@@ -172,7 +172,7 @@ public function select_range_date($from_date,$to_date)
 
     $this->db->join('T_M_D_COMPANY', 'T_M_D_COMPANY.ID = T_T_T_RETUR_PEMBELIAN.COMPANY_ID', 'left');
 
-    $this->db->join("(select \"RETUR_PEMBELIAN_ID\",sum(\"SUB_TOTAL\")\"SUM_SUB_TOTAL\" from \"T_T_T_RETUR_PEMBELIAN_RINCIAN\" group by \"RETUR_PEMBELIAN_ID\") as t_sum_1", 'T_T_T_RETUR_PEMBELIAN.ID = t_sum_1.RETUR_PEMBELIAN_ID', 'left');
+    $this->db->join("(select \"RETUR_PEMBELIAN_ID\",sum(\"SUB_TOTAL\")\"SUM_SUB_TOTAL\" from \"T_T_T_RETUR_PEMBELIAN_RINCIAN\" where \"MARK_FOR_DELETE\"=false group by \"RETUR_PEMBELIAN_ID\") as t_sum_1", 'T_T_T_RETUR_PEMBELIAN.ID = t_sum_1.RETUR_PEMBELIAN_ID', 'left');
 
     
 
@@ -189,7 +189,7 @@ public function select_range_date($from_date,$to_date)
 
   public function select_inv_int()
   {
-    $this_year = date('Y').'-01-01';
+    $this_year = date('Y-m').'-01';
     $this->db->limit(1);
     $this->db->select("INV_INT");
     $this->db->from('T_T_T_RETUR_PEMBELIAN');

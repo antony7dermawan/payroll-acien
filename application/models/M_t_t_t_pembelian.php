@@ -18,6 +18,7 @@ public function select_inv_po_auto_in_that_day($date,$supplier_id)
     $this->db->from('T_T_T_PEMBELIAN');
 
     $this->db->where("COMPANY_ID={$this->session->userdata('company_id')}");
+    $this->db->where("SUPPLIER_ID={$supplier_id}");
     $this->db->where('MARK_FOR_DELETE',false);
     $this->db->where('T_STATUS',20);
     $this->db->where("INV_SUPPLIER=''");
@@ -214,7 +215,7 @@ public function select_range_date($from_date,$to_date,$kredit_logic)
 
   public function select_inv_int()
   {
-    $this_year = date('Y').'-01-01';
+    $this_year = date('Y-m').'-01';
     $this->db->limit(1);
     $this->db->select("INV_INT");
     $this->db->from('T_T_T_PEMBELIAN');

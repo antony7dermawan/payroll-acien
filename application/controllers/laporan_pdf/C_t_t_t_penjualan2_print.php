@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class C_t_t_t_penjualan_print extends MY_Controller
+class C_t_t_t_penjualan2_print extends MY_Controller
 {
 
   public function __construct()
@@ -87,9 +87,11 @@ class C_t_t_t_penjualan_print extends MY_Controller
 
 
     $colom_width[0] = 10;
-    $colom_width[1] = 25;
-    $colom_width[2] = 40;
-    $colom_width[3] = 20;
+    $colom_width[1] = 35;
+    $colom_width[2] = 100;
+    $colom_width[3] = 45;
+
+
     $colom_width[4] = 25;
     $colom_width[5] = 15;
     $colom_width[6] = 15;
@@ -127,7 +129,7 @@ class C_t_t_t_penjualan_print extends MY_Controller
 
         $pdf->SetFont('','B',11);
         $pdf->Cell(130, 6, "", 0, 0, 'C');
-        $pdf->Cell(30, 6, "FAKTUR PENJUALAN", 0, 1, 'L');
+        $pdf->Cell(30, 6, "SURAT JALAN", 0, 1, 'L');
 
         $pdf->SetFont('','',8);
         $pdf->Cell(130, 4, "", 0, 0, 'C');
@@ -200,15 +202,11 @@ class C_t_t_t_penjualan_print extends MY_Controller
         $no_hal = $no_hal+1;
 
         $pdf->SetFont('','',8);
-        $pdf->Cell($colom_width[0], 8, "NO", 'B', 0, 'C');
-        $pdf->Cell($colom_width[1], 8, "KODE", 'B', 0, 'C');
-        $pdf->Cell($colom_width[2], 8, "NAMA BARANG", 'B', 0, 'C');
-        $pdf->Cell($colom_width[3], 8, "BANYAKNYA", 'B', 0, 'C');
-        $pdf->Cell($colom_width[4], 8, "HARGA", 'B', 0, 'C');
-        $pdf->Cell($colom_width[5], 8, "Dsc 1%", 'B', 0, 'C');
-        $pdf->Cell($colom_width[6], 8, "Dsc 2%", 'B', 0, 'C');
-        $pdf->Cell($colom_width[7], 8, "Dsc Nominal", 'B', 0, 'C');
-        $pdf->Cell($colom_width[8], 8, "JUMLAH", 'B', 1, 'C');
+        $pdf->Cell($colom_width[0], 8, "NO", 'B', 0, 'L');
+        $pdf->Cell($colom_width[1], 8, "KODE", 'B', 0, 'L');
+        $pdf->Cell($colom_width[2], 8, "NAMA BARANG", 'B', 0, 'L');
+        $pdf->Cell($colom_width[3], 8, "BANYAKNYA", 'B', 1, 'R');
+        
 
       }
 
@@ -219,16 +217,8 @@ class C_t_t_t_penjualan_print extends MY_Controller
       $pdf->MultiCell($colom_width[0], $baris_height, ($i+1).'.', '0', 'L',0,0);
       $pdf->MultiCell($colom_width[1], $baris_height, substr($kode_barang[$i], 0, 12), '0', 'L',0,0);
       $pdf->MultiCell($colom_width[2], $baris_height, substr($barang[$i], 0, 20), '0', 'L',0,0);
-      $pdf->MultiCell($colom_width[3], $baris_height, number_format(round($qty[$i])).' '.$satuan[$i], '0', 'R',0,0);
+      $pdf->MultiCell($colom_width[3]-0.01, $baris_height, number_format(round($qty[$i])).' '.$satuan[$i], '0', 'R',0,0);
 
-      $pdf->MultiCell($colom_width[4], $baris_height, number_format(round($harga[$i])), '0', 'C',0,0);
-
-      $pdf->MultiCell($colom_width[5], $baris_height, number_format(round($diskon_p_1[$i])), '0', 'C',0,0);
-      $pdf->MultiCell($colom_width[6], $baris_height, number_format(round($diskon_p_2[$i])), '0', 'C',0,0);
-      $pdf->MultiCell($colom_width[7], $baris_height, number_format(round($diskon_harga[$i])), '0', 'C',0,0);
-
-
-      $pdf->MultiCell($colom_width[8], $baris_height, number_format(round($sub_total[$i])), '0', 'R',0,0);
       
 
       $pdf->Cell(0.01, $baris_height, "", '0', 1, 'C');
@@ -238,9 +228,9 @@ class C_t_t_t_penjualan_print extends MY_Controller
 
       if($rmd==$total_baris_1_bon-1)
       {
-        $pdf->MultiCell(150, 8, 'Terbilang : #'.ucwords($this->terbilang($total_all)).' Rupiah#' , 'T', 'L',0,0);
-        $pdf->MultiCell(15, 8, 'Total' , 'T', 'R',0,0);
-        $pdf->MultiCell(25, 8, number_format(round($total_all)) , 'T', 'R',0,1);
+        $pdf->MultiCell(150, 8, '' , 'T', 'L',0,0);
+        $pdf->MultiCell(15, 8, '' , 'T', 'R',0,0);
+        $pdf->MultiCell(25, 8, '' , 'T', 'R',0,1);
         $total_all=0;
         
         $pdf->Cell(40, 6, "NB: Barang yang sudah dibeli tidak dapat ditukar/dikembalikan", 0, 1, 'L');
@@ -292,9 +282,9 @@ class C_t_t_t_penjualan_print extends MY_Controller
       }
     }
 
-    $pdf->MultiCell(150, 8, 'Terbilang : #'.ucwords($this->terbilang($total_all)).' Rupiah#' , 'T', 'L',0,0);
-    $pdf->MultiCell(15, 8, 'Total' , 'T', 'R',0,0);
-    $pdf->MultiCell(25, 8, number_format(round($total_all)) , 'T', 'R',0,1);
+        $pdf->MultiCell(150, 8, '' , 'T', 'L',0,0);
+        $pdf->MultiCell(15, 8, '' , 'T', 'R',0,0);
+        $pdf->MultiCell(25, 8, '' , 'T', 'R',0,1);
 
     
 

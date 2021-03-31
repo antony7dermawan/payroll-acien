@@ -47,6 +47,8 @@ public function update($data, $id)
     {
       $this->db->where('T_T_T_RETUR_PEMBELIAN_RINCIAN.MARK_FOR_DELETE',FALSE);
     }
+
+    $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
     
     $this->db->where('T_T_T_RETUR_PEMBELIAN_RINCIAN.RETUR_PEMBELIAN_ID',$retur_pembelian_id);
     $this->db->order_by("ID", "desc");
@@ -105,7 +107,7 @@ public function update($data, $id)
     $this->db->join('T_M_D_BARANG', 'T_M_D_BARANG.BARANG_ID = T_T_T_RETUR_PEMBELIAN_RINCIAN.BARANG_ID', 'left');
 
 
-
+    $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
     
     $this->db->where('T_T_T_RETUR_PEMBELIAN_RINCIAN.ID',$id);
 
@@ -145,6 +147,7 @@ public function update($data, $id)
     $this->db->join('T_M_D_BARANG', 'T_M_D_BARANG.BARANG_ID = T_T_T_PEMBELIAN_RINCIAN.BARANG_ID', 'left');
 
 
+    $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.SPECIAL_CASE_ID',0);
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.MARK_FOR_DELETE',FALSE);
     $this->db->where('T_T_T_RETUR_PEMBELIAN.ID',$retur_pembelian_id);
@@ -188,6 +191,7 @@ public function update($data, $id)
     $this->db->join('T_M_D_BARANG', 'T_M_D_BARANG.BARANG_ID = T_T_T_PEMBELIAN_RINCIAN.BARANG_ID', 'left');
 
 
+    $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.BARANG_ID',$barang_id);
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.MARK_FOR_DELETE',false);
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.SPECIAL_CASE_ID',0);

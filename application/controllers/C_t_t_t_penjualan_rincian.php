@@ -117,12 +117,15 @@ class C_t_t_t_penjualan_rincian extends MY_Controller
     $diskon_p_1 = floatval($this->input->post("diskon_p_1"));
     $diskon_p_2 = floatval($this->input->post("diskon_p_2"));
     $diskon_harga = floatval($this->input->post("diskon_harga"));
-    
+    $harga_jual = floatval($this->input->post("harga_jual"));
+
+    /* harga db
     $read_select = $this->m_t_m_d_barang->select_by_id($barang_id);
     foreach ($read_select as $key => $value) 
     {
       $harga_jual = $value->HARGA_JUAL;
     }
+    */
 
     $sub_total_1 = ($qty * $harga_jual) - (($qty * $harga_jual * $diskon_p_1)/100);
     $sub_total_2 = ($sub_total_1) - (($sub_total_1 * $diskon_p_2)/100);

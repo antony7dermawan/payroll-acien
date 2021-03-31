@@ -3,7 +3,7 @@
     <form action='<?php echo base_url("c_t_t_t_pembelian/date_pembelian"); ?>' class='no_voucer_area' method="post" id=''>
       <h5>
       <?php
-      
+      $level_user_id = $this->session->userdata('level_user_id');
       foreach ($c_t_t_t_pembelian_by_id as $key => $value) {
         $inv = $value->INV;
       }
@@ -187,8 +187,11 @@
         </div>
 
 
-
-        <div class="form-group">
+        <?php
+        if($level_user_id==1)
+        {
+        ?>
+        <div class="history_pembelian">
             <label>History Pembelian</label>
             <table name="" class="table table-xs">
               <thead>
@@ -204,6 +207,15 @@
               </tbody>
             </table>
         </div>
+        <style type="text/css">
+          .history_pembelian
+          {
+            overflow: scroll;
+          }
+        </style>
+        <?php
+        }
+        ?>
 
 
 
@@ -449,7 +461,13 @@ console.log(reading_feedback);
     background-color: #e8e8e8;
     color: #333;
   }
+
+
+  
 </style>
+
+
+
 
 
 

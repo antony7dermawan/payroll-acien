@@ -53,7 +53,7 @@ class C_t_m_d_pelanggan extends MY_Controller
     $email = substr($this->input->post("email"), 0, 100);
     $pelanggan = substr($this->input->post("pelanggan"), 0, 100);
     $no_telp = substr($this->input->post("no_telp"), 0, 50);
-    $alamat = substr($this->input->post("alamat"), 0, 200);
+    $alamat = substr($this->input->post("alamat"), 0, 50);
     $nik = substr($this->input->post("nik"), 0, 50);
     $npwp = substr($this->input->post("npwp"), 0, 50);
 

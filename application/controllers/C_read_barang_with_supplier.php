@@ -31,7 +31,7 @@ class C_read_barang_with_supplier extends MY_Controller
       echo "</td>";
 
       echo "<td>";
-      echo $value->HARGA;
+      echo 'Rp'.number_format($value->HARGA);
       echo "</td>";
       
       echo "<td>";
