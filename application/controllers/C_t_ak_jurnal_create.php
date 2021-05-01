@@ -126,7 +126,7 @@ class C_t_ak_jurnal_create extends MY_Controller
     $read_select = $this->m_t_ak_jurnal_create->select();
     foreach ($read_select as $key => $value) {
       if ($key == 0) {
-        $created_id = strtotime('Y-m-d H:i:s');
+        $created_id = strtotime(date('Y-m-d H:i:s'));
       }
       $data = array(
         'DATE' => $value->DATE,
