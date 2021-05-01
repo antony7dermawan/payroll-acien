@@ -168,7 +168,7 @@ class C_t_t_t_penjualan_rincian extends MY_Controller
         'CREATED_BY' => $this->session->userdata('username'),
         'UPDATED_BY' => '',
         'MARK_FOR_DELETE' => FALSE,
-        'COMPANY_ID' => $this->session->userdata('company_id'),
+        'COMPANY_ID' => $this->session->userdata('company_id')
         
       );
 
@@ -215,6 +215,7 @@ class C_t_t_t_penjualan_rincian extends MY_Controller
 
       if(($sisa_qty_tt-$qty)<=$minimum_stok) // stok sisa kena minimum stok
       {
+        $inv_int=0;
         $read_select = $this->m_t_t_t_pembelian->select_inv_int();
         foreach ($read_select as $key => $value) 
         {

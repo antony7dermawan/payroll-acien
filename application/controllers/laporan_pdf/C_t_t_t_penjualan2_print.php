@@ -23,7 +23,7 @@ class C_t_t_t_penjualan2_print extends MY_Controller
     $pdf = new \TCPDF();
     $pdf->SetPrintHeader(false);
     $pdf->SetPrintFooter(false);
-    $pdf->AddPage('P', 'mm', 'A4');
+    $pdf->AddPage('L',  array(210,148));
     $pdf->SetAutoPageBreak(true, 0);
  
         // Add Header
@@ -115,7 +115,7 @@ class C_t_t_t_penjualan2_print extends MY_Controller
         {
           $pdf->SetPrintHeader(false);
           $pdf->SetPrintFooter(false);
-          $pdf->AddPage('P', 'mm', 'A4');
+          $pdf->AddPage('L',  array(210,148));
         }
         
 

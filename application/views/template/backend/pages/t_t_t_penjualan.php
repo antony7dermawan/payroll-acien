@@ -106,6 +106,12 @@
                 echo "window.open('laporan_pdf/c_t_t_t_penjualan2_print/index/" . $value->ID . "');";
                 echo "}";
                 echo "</script>";
+
+
+                if($value->ENABLE_EDIT==0)
+                {
+                  echo "<a class='fa text-c-green'>Sudah Ditagih</a>";
+                }
               }
               
 

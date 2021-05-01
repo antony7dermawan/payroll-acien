@@ -3,7 +3,7 @@
    
       <h5>
       <?php
-      
+      $level_user_id = $this->session->userdata('level_user_id');
       foreach ($c_t_t_t_retur_penjualan_by_id as $key => $value) {
         $inv = $value->INV;
       }
@@ -174,8 +174,11 @@
         </div>
 
 
-
-        <div class="form-group">
+        <?php
+        if($level_user_id==1)
+        {
+        ?>
+        <div class="history_pembelian">
             <label>History Penjualan</label>
             <table name="" class="table table-xs">
               <thead>
@@ -191,6 +194,17 @@
               </tbody>
             </table>
         </div>
+
+
+        <style type="text/css">
+          .history_pembelian
+          {
+            overflow: scroll;
+          }
+        </style>
+        <?php
+        }
+        ?>
 
 
 

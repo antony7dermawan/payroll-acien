@@ -27,18 +27,21 @@ class c_faktur_penjualan_print extends MY_Controller
     
 
 
+
     $pdf->SetFont('','',12);
 
     $read_select = $this->m_t_ak_faktur_penjualan->select_by_id($id);
-    foreach ($read_select as $key => $value) 
+    foreach ($read_select as $key => $value)
     {
-      $no_pelanggan=$value->NO_PELANGGAN;
+      $no_pelanggan=$value->PELANGGAN;
       $no_faktur=$value->NO_FAKTUR;
       $tgl_faktur=$value->DATE;
-      $nama=$value->NAMA;
+      $nama=$value->PELANGGAN;
       $alamat=$value->ALAMAT;
       $npwp=$value->NPWP;
-      $telepon=$value->TELEPON;
+      $telepon=$value->NO_TELP;
+      $ppn_logic=$value->PPN;
+      $pph_logic=$value->PPH;
     }
 
     
@@ -62,21 +65,14 @@ class c_faktur_penjualan_print extends MY_Controller
         {
           $pdf->AddPage();
         }
-        $pdf->Image('assets/images/logo-jo.jpg',10,10,0);
+        //$pdf->Image('assets/images/logo-jo.jpg',10,10,0);
 
-        $pdf->SetFont('','B',12);
-        $pdf->Cell(30, 11, "", 0, 0, 'L');
-        $pdf->Cell(100, 11, "PT. JO PERDANA AGRI TECHNOLOGY", 0, 1, 'L');
+        $pdf->SetFont('','B',16);
+    
+        $pdf->Cell(190, 11, "CV. JAYA MAKMUR", 'B', 1, 'L');
 
-        $pdf->SetFont('','',12);
-        $pdf->Cell(30, 8, "", 0, 0, 'L');
-        $pdf->Cell(100, 6, "JL. RAYA BENGKAYANG DUSUN BARABAS BARU 1 RT.1 RW.1", 0, 1, 'L');
-        $pdf->Cell(30, 8, "", 0, 0, 'L');
-        $pdf->Cell(100, 6, "MEKAR BARU - MONTERADO", 0, 1, 'L');
-        $pdf->Cell(30, 8, "", 0, 0, 'L');
-        $pdf->Cell(100, 6, "KALIMANTAN BARAT", 0, 1, 'L');
+        
 
-        $pdf->Cell( 190,5,'','B',1,'C');
 
         $pdf->SetFont('','B',16);
         $pdf->Cell( 190,10,'Faktur Penjualan','0',1,'C');
@@ -112,10 +108,9 @@ class c_faktur_penjualan_print extends MY_Controller
         $pdf->Cell( $size[0],8,'No.','1',0,'C');
         $pdf->Cell( $size[1],8,'Keterangan','1',0,'C');
         $pdf->Cell( $size[2],8,'Tgl Kirim','1',0,'C');
-        $pdf->Cell( $size[3],8,'No. Tiket','1',0,'C');
-        $pdf->Cell( $size[4],8,'Jumlah','1',0,'C');
-        $pdf->Cell( $size[5],8,'Harga','1',0,'C');
-        $pdf->Cell( $size[6],8,'Jumlah','1',1,'C');
+        $pdf->Cell( $size[3]+$size[4],8,'No. Tiket','1',0,'C');
+
+        $pdf->Cell( $size[5]+$size[6],8,'Jumlah','1',1,'C');
       }
       
       
@@ -123,14 +118,12 @@ class c_faktur_penjualan_print extends MY_Controller
       $pdf->Cell( $size[0],6,$key+1,'L',0,'C');
       $pdf->Cell( $size[1],6,$value->KETERANGAN,'L',0,'L');
       $pdf->Cell( $size[2],6,date('d-m-Y', strtotime($value->DATE)),'L',0,'C');
-      $pdf->Cell( $size[3],6,$value->NO_TIKET,'L',0,'C');
-      $pdf->Cell( $size[4],6,number_format(intval($value->NETO)).' Kg','L',0,'R');
-      $pdf->Cell( $size[5],6,number_format(intval($value->HARGA)),'L',0,'R');
-      $pdf->Cell( $size[6]-0.1,6,number_format(intval($value->TOTAL_PENJUALAN)),'L',0,'R');
+      $pdf->Cell( $size[3]+$size[4],6,$value->INV,'L',0,'C');
+      $pdf->Cell( $size[5]+$size[6]-0.1,6,number_format(round($value->SUM_SUB_TOTAL)),'L',0,'R');
       $pdf->Cell( 0.1,6,'','L',1,'R');
 
-      $total_kuantitas = $total_kuantitas+intval($value->NETO);
-      $total_sub = $total_sub+intval($value->TOTAL_PENJUALAN);
+      $total_kuantitas = $total_kuantitas+round($value->SUM_SUB_TOTAL);
+      $total_sub = $total_sub+round($value->SUM_SUB_TOTAL);
       $dpp = $total_sub;
     }
 
@@ -139,16 +132,14 @@ class c_faktur_penjualan_print extends MY_Controller
       $pdf->Cell( $size[0],6,'','L',0,'C');
       $pdf->Cell( $size[1],6,'','L',0,'L');
       $pdf->Cell( $size[2],6,'','L',0,'C');
-      $pdf->Cell( $size[3],6,'','L',0,'C');
-      $pdf->Cell( $size[4],6,'','L',0,'R');
-      $pdf->Cell( $size[5],6,'','L',0,'R');
-      $pdf->Cell( $size[6]-0.1,6,'','L',0,'R');
+      $pdf->Cell( $size[3]+$size[4],6,'','L',0,'C');
+
+      $pdf->Cell( $size[5]+$size[6]-0.1,6,'','L',0,'R');
       $pdf->Cell( 0.1,6,'','L',1,'R'); 
     }
 
     #.............................paper head end
-    $pdf->Cell( $size[0]+$size[1]+$size[2]+$size[3]+$size[4],8,'Total Kuantitas   '.number_format(intval($total_kuantitas)),'1',0,'R');
-    $pdf->Cell( $size[5]+$size[6],8,'','1',1,'L');
+    
 
     $pdf->Cell( 0.1,8,'','L',0,'R');
     $pdf->Cell( $size[0]+$size[1]-0.1,8,'Total Sub','T',0,'L');
@@ -164,14 +155,23 @@ class c_faktur_penjualan_print extends MY_Controller
     $pdf->Cell( 0.1,8,'','L',1,'R');
 
 
-    $ppn = (10 * intval($dpp))/100;
+    $ppn = 0;
+    if($ppn_logic=='t')
+    {
+      $ppn = (10 * intval($dpp))/100;
+    }
+    
     $pdf->Cell( 0.1,8,'','L',0,'R');
     $pdf->Cell( $size[0]+$size[1]-0.1,8,'PPN','T',0,'L');
     $pdf->Cell( $size[2],8,':','T',0,'L');
     $pdf->Cell( $size[3]+$size[4]+$size[5]+$size[6]-0.1,8,number_format(intval($ppn)),'T',0,'R');
     $pdf->Cell( 0.1,8,'','L',1,'R');
 
-    $pph_22 = intval(0.25 * floatval($dpp))/100;
+    $pph_22 = 0;
+    if($pph_logic=='t')
+    {
+      $pph_22 = intval(0.25 * floatval($dpp))/100;
+    }
     $pdf->Cell( 0.1,8,'','L',0,'R');
     $pdf->Cell( $size[0]+$size[1]-0.1,8,'PPH 22 (0.25%)','T',0,'L');
     $pdf->Cell( $size[2],8,':','T',0,'L');

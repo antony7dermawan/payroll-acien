@@ -57,8 +57,8 @@ class C_t_m_d_company extends MY_Controller
     $inv_jual = substr($this->input->post("inv_jual"), 0, 50);
     $inv_rj = substr($this->input->post("inv_rj"), 0, 50);
     $inv_po = substr($this->input->post("inv_po"), 0, 50);
-    $inv_pinlok = substr($this->input->post("inv_pinlok"), 0, 50);
-
+    $inv_faktur_penjualan = substr($this->input->post("inv_faktur_penjualan"), 0, 50);
+    $inv_terima_pelanggan = substr($this->input->post("inv_terima_pelanggan"), 0, 50);
 
 
     //Dikiri nama kolom pada database, dikanan hasil yang kita tangkap nama formnya.
@@ -69,7 +69,8 @@ class C_t_m_d_company extends MY_Controller
       'INV_PENJUALAN' => $inv_jual,
       'INV_RETUR_PENJUALAN' => $inv_rj,
       'INV_PO' => $inv_po,
-      'INV_PINLOK' => $inv_pinlok,
+      'INV_FAKTUR_PENJUALAN' => $inv_faktur_penjualan,
+      'INV_TERIMA_PELANGGAN' => $inv_terima_pelanggan,
       'CREATED_BY' => $this->session->userdata('username'),
       'UPDATED_BY' => '',
       'MARK_FOR_DELETE' => FALSE
@@ -96,7 +97,8 @@ class C_t_m_d_company extends MY_Controller
     $inv_jual = substr($this->input->post("inv_jual"), 0, 50);
     $inv_rj = substr($this->input->post("inv_rj"), 0, 50);
     $inv_po = substr($this->input->post("inv_po"), 0, 50);
-    $inv_pinlok = substr($this->input->post("inv_pinlok"), 0, 50);
+    $inv_faktur_penjualan = substr($this->input->post("inv_faktur_penjualan"), 0, 50);
+    $inv_terima_pelanggan = substr($this->input->post("inv_terima_pelanggan"), 0, 50);
 
 
     //Dikiri nama kolom pada database, dikanan hasil yang kita tangkap nama formnya.
@@ -107,7 +109,8 @@ class C_t_m_d_company extends MY_Controller
       'INV_PENJUALAN' => $inv_jual,
       'INV_RETUR_PENJUALAN' => $inv_rj,
       'INV_PO' => $inv_po,
-      'INV_PINLOK' => $inv_pinlok,
+      'INV_FAKTUR_PENJUALAN' => $inv_faktur_penjualan,
+      'INV_TERIMA_PELANGGAN' => $inv_terima_pelanggan,
       'UPDATED_BY' => $this->session->userdata('username')
     );
 

@@ -56,7 +56,8 @@ class Auth extends MY_Controller {
           //old
           'now_no_voucer'=>'',
           
-          
+          'date_from_select_penjualan'=>date('Y-m-d'),
+          'date_to_select_penjualan'=>date('Y-m-d'),
           'date_faktur_penjualan'=>date('Y-m-d'),
           'date_terima_pelanggan'=>date('Y-m-d'),
           'date_from_select_jurnal'=>date('Y-m-d'),

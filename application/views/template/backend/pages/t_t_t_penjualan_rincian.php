@@ -12,6 +12,7 @@
       }
       foreach ($c_t_t_t_penjualan_by_id as $key => $value) {
         $inv = $value->INV;
+        $enable_edit = $value->ENABLE_EDIT;
       }
 
 
@@ -28,7 +29,13 @@
 
     <a href="<?= base_url("c_t_t_t_penjualan"); ?>" class="btn waves-effect waves-light btn-inverse"><i class="icofont icofont-double-left"></i>Back</a>
     <!-- Tombol untuk menambah data akun !-->
-    <button data-toggle="modal" data-target="#addModal" class="btn btn-success waves-effect waves-light">New Data</button>
+    <?php
+    if($enable_edit==1)
+    {
+      echo "<button data-toggle='modal' data-target='#addModal' class='btn btn-success waves-effect waves-light'>New Data</button>";
+    }
+    ?>
+    
 
     <div class="table-responsive dt-responsive">
       <table id="dom-jqry" class="table table-striped table-bordered nowrap">
@@ -74,7 +81,7 @@
               echo "<td>";
               
                
-              if($value->QTY == $value->SISA_QTY)
+              if($value->QTY == $value->SISA_QTY and $enable_edit==1)
               {
                 echo "<a href='".site_url('c_t_t_t_penjualan_rincian/delete/'.$value->ID.'/'.$penjualan_id)."' ";
                 echo "onclick=\"return confirm('Apakah kamu yakin ingin menghapus data ini?')\"";

@@ -131,8 +131,12 @@
             </div>
 
             <div class="form-group">
-              <label>Inv PinLOk</label>
-              <input type='text' class='form-control' placeholder='Input Text' name='inv_pinlok'>
+              <label>Inv Faktur Penjualan</label>
+              <input type='text' class='form-control' placeholder='Input Text' name='inv_faktur_penjualan'>
+            </div>
+            <div class="form-group">
+              <label>Inv Terima Pelanggan</label>
+              <input type='text' class='form-control' placeholder='Input Text' name='inv_terima_pelanggan'>
             </div>
 
             
@@ -203,8 +207,12 @@
             </div>
 
             <div class="form-group">
-              <label>Inv PinLOk</label>
-              <input type='text' class='form-control' placeholder='Input Text' name='inv_pinlok'>
+              <label>Inv Faktur Penjualan</label>
+              <input type='text' class='form-control' placeholder='Input Text' name='inv_faktur_penjualan'>
+            </div>
+            <div class="form-group">
+              <label>Inv Terima Pelanggan</label>
+              <input type='text' class='form-control' placeholder='Input Text' name='inv_terima_pelanggan'>
             </div>
 
 
@@ -254,7 +262,9 @@
         INV_PO : inv_po,
         INV_PINLOK : inv_pinlok,
         CREATED_BY : created_by,
-        UPDATED_BY : updated_by
+        UPDATED_BY : updated_by,
+        INV_FAKTUR_PENJUALAN : inv_faktur_penjualan,
+        INV_TERIMA_PELANGGAN : inv_terima_pelanggan
       } = User[0];
 
       elModalEdit.querySelector("[name=id]").value = ID;
@@ -267,6 +277,8 @@
       elModalEdit.querySelector("[name=inv_pinlok]").value = inv_pinlok;
       elModalEdit.querySelector("[name=created_by]").text = created_by;
       elModalEdit.querySelector("[name=updated_by]").text = updated_by;
+      elModalEdit.querySelector("[name=inv_faktur_penjualan]").value = inv_faktur_penjualan;
+      elModalEdit.querySelector("[name=inv_terima_pelanggan]").value = inv_terima_pelanggan;
 
     })
   })

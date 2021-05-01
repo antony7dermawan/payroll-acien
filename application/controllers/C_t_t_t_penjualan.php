@@ -149,7 +149,8 @@ class C_t_t_t_penjualan extends MY_Controller
         'PRINTED' => FALSE,
         'LOKASI_ID' => $lokasi_id,
         'INV_HEAD' => $inv_head,
-        'TABLE_CODE' => 'PENJUALAN'
+        'TABLE_CODE' => 'PENJUALAN',
+        'ENABLE_EDIT' => 1
       );
 
       $this->m_t_t_t_penjualan->tambah($data);
