@@ -317,6 +317,7 @@ class C_t_ak_faktur_penjualan extends MY_Controller
 
 
 
+
       if($logic_no_faktur == 0)
       {
         $data = array(
@@ -362,6 +363,15 @@ class C_t_ak_faktur_penjualan extends MY_Controller
     $ppn = $this->input->post("ppn");
     $pph = $this->input->post("pph");
 
+
+    if($ppn==null)
+    {
+      $ppn = false;
+    }
+    if($pph==null)
+    {
+      $pph = false;
+    }
 
 //Dikiri nama kolom pada database, dikanan hasil yang kita tangkap nama formnya.
     $data = array(

@@ -186,7 +186,7 @@
 
                 <fieldset class="form-group">
 
-                  <input type="checkbox" id="ppn" name="ppn" >
+                  <input type="checkbox" name="ppn" >
                   <label>PPN (10%)</label>
                   
                 </fieldset>
@@ -197,7 +197,7 @@
               <div class="col-md-6">
 
                 <fieldset class="form-group">
-                  <input type="checkbox" id="pph" name="pph" >
+                  <input type="checkbox" name="pph" >
                   <label>PPH (0.25%)</label>
                   
                 </fieldset>
