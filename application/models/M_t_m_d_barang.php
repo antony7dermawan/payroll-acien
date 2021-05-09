@@ -22,6 +22,22 @@ public function select_id($id)
 }
 
 
+
+
+
+public function select_count()
+{
+  $this->db->select('count(*)');
+  $this->db->from('T_M_D_BARANG');
+  $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+  $this->db->where('MARK_FOR_DELETE', false);
+  $akun = $this->db->get ();
+  return $akun->result ();
+}
+
+
+
+
 public function select_by_kategori($kategori_id)
 {
   $this->db->select('BARANG_ID');

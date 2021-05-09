@@ -8,7 +8,7 @@ class C_t_m_d_barang extends MY_Controller
   {
     parent::__construct();
 
-
+    $this->load->model('m_t_m_d_postfix');
     $this->load->model('m_t_m_d_company');
     $this->load->model('m_t_m_d_barang');
     $this->load->model('m_t_m_d_kategori');
@@ -26,6 +26,10 @@ class C_t_m_d_barang extends MY_Controller
     $this->session->set_userdata('t_m_d_barang_delete_logic', '1');
     $data = [
       "c_t_m_d_company" => $this->m_t_m_d_company->select(),
+
+      "total_barang_id" => $this->m_t_m_d_barang->select_count(),
+      "c_t_m_d_postfix" => $this->m_t_m_d_postfix->select_by_id(),
+
       "c_t_m_d_barang" => $this->m_t_m_d_barang->select(),
       "c_t_m_d_kategori" => $this->m_t_m_d_kategori->select_option(),
       "c_t_m_d_satuan" => $this->m_t_m_d_satuan->select_option(),

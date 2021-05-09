@@ -62,7 +62,38 @@
     <!-- Menampilkan notif !-->
     <?= $this->session->flashdata('notif') ?>
     <!-- Tombol untuk menambah data akun !-->
-    <button data-toggle="modal" data-target="#addModal" class="btn btn-success waves-effect waves-light">New Data</button>
+    
+
+
+
+    <?php
+
+    foreach ($total_barang_id as $key => $value) 
+    {
+      $count_existing_barang_id_row = $value->count;
+    }
+
+    foreach ($c_t_m_d_postfix as $key => $value) 
+    {
+      $company_id_qty = $value->COMPANY_ID_QTY;
+      $barang_id_qty = $value->BARANG_ID_QTY;
+      $postfix = $value->POSTFIX;
+    }
+
+    if($count_existing_barang_id_row<$barang_id_qty)
+    {
+      echo "<button data-toggle='modal' data-target='#addModal' class='btn btn-success waves-effect waves-light'>New Data (limit=".$barang_id_qty." / Used=".$count_existing_barang_id_row.") </button>";
+    }
+
+
+    if($count_existing_barang_id_row>=$barang_id_qty)
+    {
+      echo "<button data-toggle='modal' data-target='#addModal' class='btn btn-success waves-effect waves-light' disabled>New Data (limit=".$barang_id_qty." / Used=".$count_existing_barang_id_row.") </button>";
+    }
+
+    ?>
+
+
 
     <div class="table-responsive dt-responsive">
       <table id="dom-jqry" class="table table-striped table-bordered nowrap">

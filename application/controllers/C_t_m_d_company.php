@@ -9,6 +9,8 @@ class C_t_m_d_company extends MY_Controller
     parent::__construct();
 
     $this->load->model('m_t_m_d_company');
+
+    $this->load->model('m_t_m_d_postfix');
   }
 
   public function index()
@@ -16,6 +18,9 @@ class C_t_m_d_company extends MY_Controller
     $this->session->set_userdata('t_m_d_company_delete_logic', '1');
     $data = [
       "c_t_m_d_company" => $this->m_t_m_d_company->select(),
+      "total_company_id" => $this->m_t_m_d_company->select_count(),
+
+      "c_t_m_d_postfix" => $this->m_t_m_d_postfix->select_by_id(),
       "title" => "Master Company",
       "description" => "Company ID untuk Login"
     ];

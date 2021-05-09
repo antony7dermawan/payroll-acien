@@ -6,7 +6,37 @@
     <!-- Menampilkan notif !-->
     <?= $this->session->flashdata('notif') ?>
     <!-- Tombol untuk menambah data akun !-->
-    <button data-toggle="modal" data-target="#addModal" class="btn btn-success waves-effect waves-light">New Data</button>
+    
+
+    <?php
+
+    foreach ($total_company_id as $key => $value) 
+    {
+      $count_existing_company_id_row = $value->count;
+    }
+
+    foreach ($c_t_m_d_postfix as $key => $value) 
+    {
+      $company_id_qty = $value->COMPANY_ID_QTY;
+      $barang_id_qty = $value->BARANG_ID_QTY;
+      $postfix = $value->POSTFIX;
+    }
+
+    if($count_existing_company_id_row<$company_id_qty)
+    {
+      echo "<button data-toggle='modal' data-target='#addModal' class='btn btn-success waves-effect waves-light'>New Data (limit=".$company_id_qty.") </button>";
+    }
+
+
+    if($count_existing_company_id_row>=$company_id_qty)
+    {
+      echo "<button data-toggle='modal' data-target='#addModal' class='btn btn-success waves-effect waves-light' disabled>New Data (limit=".$company_id_qty.") </button>";
+    }
+    
+
+   
+
+    ?>
 
     <div class="table-responsive dt-responsive">
       <table id="dom-jqry" class="table table-striped table-bordered nowrap">
@@ -33,11 +63,7 @@
                 echo "<i class='icon feather icon-edit f-w-600 f-16 m-r-15 text-c-green'></i>";
               echo "</a>";
 
-              echo "<a href='".site_url('c_t_m_d_company/delete/' . $value->ID)."' ";
-              ?>
-              onclick="return confirm('Apakah kamu yakin ingin menghapus data ini?')"
-              <?php
-              echo "> <i class='feather icon-trash-2 f-w-600 f-16 text-c-red'></i></a>";
+              
 
               echo "</td>";
 
