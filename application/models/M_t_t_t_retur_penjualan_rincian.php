@@ -50,6 +50,10 @@ public function update($data, $id)
     
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->where('T_T_T_RETUR_PENJUALAN_RINCIAN.RETUR_PENJUALAN_ID',$retur_penjualan_id);
     $this->db->order_by("ID", "desc");
 
@@ -64,6 +68,9 @@ public function update($data, $id)
     $this->db->from('T_M_D_BARANG');
     $this->db->join("(select \"T_T_T_RETUR_PENJUALAN_RINCIAN\".\"BARANG_ID\",sum(\"QTY\")\"SUM_QTY\" from \"T_T_T_RETUR_PENJUALAN_RINCIAN\" LEFT OUTER JOIN \"T_T_T_RETUR_PENJUALAN\" on \"T_T_T_RETUR_PENJUALAN\".\"ID\"=\"T_T_T_RETUR_PENJUALAN_RINCIAN\".\"RETUR_PENJUALAN_ID\" where  \"T_T_T_RETUR_PENJUALAN_RINCIAN\".\"MARK_FOR_DELETE\"=false and \"T_T_T_RETUR_PENJUALAN\".\"DATE\"<'{$limit_date}' group by \"T_T_T_RETUR_PENJUALAN_RINCIAN\".\"BARANG_ID\") as t_sum_1", 'T_M_D_BARANG.BARANG_ID = t_sum_1.BARANG_ID', 'left');
     $this->db->where('T_M_D_BARANG.BARANG_ID',$barang_id);
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $akun = $this->db->get ();
     return $akun->result ();
   }
@@ -107,6 +114,10 @@ public function update($data, $id)
 
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->where('T_T_T_RETUR_PENJUALAN_RINCIAN.ID',$id);
 
     $akun = $this->db->get ();
@@ -145,6 +156,10 @@ public function update($data, $id)
 
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->where('T_T_T_PENJUALAN_RINCIAN.MARK_FOR_DELETE',FALSE);
     $this->db->where('T_T_T_RETUR_PENJUALAN.ID',$retur_penjualan_id);
 
@@ -189,6 +204,10 @@ public function update($data, $id)
     $this->db->where('T_T_T_PENJUALAN_RINCIAN.BARANG_ID',$barang_id);
     
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+    
     $this->db->where('T_T_T_PENJUALAN_RINCIAN.MARK_FOR_DELETE',false);
     $this->db->where('T_T_T_RETUR_PENJUALAN.ID',$retur_penjualan_id);
 

@@ -21,6 +21,9 @@ public function select_min_harga_barang($barang_id)
     
 
     $this->db->where("COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->where('BARANG_ID',$barang_id);
     $this->db->where('MARK_FOR_DELETE',false);
     $this->db->where('SPECIAL_CASE_ID',0);
@@ -38,10 +41,15 @@ public function select_min_harga_status($barang_id,$harga)
     $this->db->from('T_T_T_PEMBELIAN_RINCIAN');
 
     $this->db->where("COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->where('BARANG_ID',$barang_id);
     $this->db->where('HARGA',$harga);
     $this->db->where('MARK_FOR_DELETE',false);
     $this->db->where('SPECIAL_CASE_ID',0);
+
+    
 
     $this->db->order_by("ID", "desc");
 
@@ -57,6 +65,9 @@ public function select_barang_id_inside_inv_pembelian($pembelian_id,$barang_id)
     $this->db->from('T_T_T_PEMBELIAN_RINCIAN');
 
     $this->db->where("COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->where('BARANG_ID',$barang_id);
     $this->db->where('PEMBELIAN_ID',$pembelian_id);
     $this->db->where('MARK_FOR_DELETE',false);
@@ -82,6 +93,9 @@ public function select_sisa_qty($barang_id)
     
 
     $this->db->where("COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->where('BARANG_ID',$barang_id);
     $this->db->where('MARK_FOR_DELETE',false);
     $this->db->where('SPECIAL_CASE_ID',0);
@@ -128,6 +142,10 @@ public function select_barang_with_supplier($barang_id)
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
     $this->db->where("T_T_T_PEMBELIAN_RINCIAN.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+    $this->db->where("T_T_T_PEMBELIAN_RINCIAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.SPECIAL_CASE_ID',0);
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.MARK_FOR_DELETE',false);
     $this->db->where('T_M_D_BARANG.BARANG_ID',$barang_id);
@@ -188,8 +206,68 @@ public function select_barang_with_supplier($barang_id)
     
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.PEMBELIAN_ID',$pembelian_id);
     $this->db->order_by("ID", "desc");
+
+    $akun = $this->db->get ();
+    return $akun->result ();
+  }
+
+
+
+
+
+
+  public function select_by_id($pembelian_rincian_id)
+  {
+    
+
+
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.ID");
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.PEMBELIAN_ID");
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.BARANG_ID");
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.QTY");
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.SISA_QTY");
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.HARGA");
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.SUB_TOTAL");
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.SISA_QTY_TT");
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.SPECIAL_CASE_ID");
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.SUPPLIER_ID");
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.CREATED_BY");
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.UPDATED_BY");
+    $this->db->select("T_T_T_PEMBELIAN_RINCIAN.MARK_FOR_DELETE");
+
+
+
+    $this->db->select('T_M_D_BARANG.KODE_BARANG');
+    $this->db->select('T_M_D_BARANG.BARANG');
+    $this->db->select('T_M_D_BARANG.PART_NUMBER');
+    $this->db->select('T_M_D_BARANG.MERK_BARANG');
+    $this->db->select('T_M_D_BARANG.POSISI');
+    $this->db->select('T_M_D_BARANG.MINIMUM_STOK');
+
+
+
+    $this->db->select('T_M_D_SATUAN.SATUAN');
+
+
+
+    $this->db->from('T_T_T_PEMBELIAN_RINCIAN');
+
+    
+    $this->db->join('T_M_D_BARANG', 'T_M_D_BARANG.BARANG_ID = T_T_T_PEMBELIAN_RINCIAN.BARANG_ID', 'left');
+
+    $this->db->join('T_M_D_SATUAN', 'T_M_D_BARANG.SATUAN_ID = T_M_D_SATUAN.ID', 'left');
+
+   
+
+
+    $this->db->where('T_T_T_PEMBELIAN_RINCIAN.ID',$pembelian_rincian_id);
+
 
     $akun = $this->db->get ();
     return $akun->result ();
@@ -204,6 +282,9 @@ public function select_qty_before_date($limit_date,$barang_id)
     $this->db->from('T_M_D_BARANG');
     $this->db->join("(select \"T_T_T_PEMBELIAN_RINCIAN\".\"BARANG_ID\",sum(\"QTY\")\"SUM_QTY\" from \"T_T_T_PEMBELIAN_RINCIAN\" LEFT OUTER JOIN \"T_T_T_PEMBELIAN\" on \"T_T_T_PEMBELIAN\".\"ID\"=\"T_T_T_PEMBELIAN_RINCIAN\".\"PEMBELIAN_ID\" where \"T_T_T_PEMBELIAN_RINCIAN\".\"SPECIAL_CASE_ID\"=0 and \"T_T_T_PEMBELIAN_RINCIAN\".\"MARK_FOR_DELETE\"=false and \"T_T_T_PEMBELIAN\".\"DATE\"<'{$limit_date}' group by \"T_T_T_PEMBELIAN_RINCIAN\".\"BARANG_ID\") as t_sum_1", 'T_M_D_BARANG.BARANG_ID = t_sum_1.BARANG_ID', 'left');
     $this->db->where('T_M_D_BARANG.BARANG_ID',$barang_id);
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $akun = $this->db->get ();
     return $akun->result ();
   }
@@ -220,6 +301,8 @@ public function select_by_pembelian_id_and_barang_id($pembelian_id,$barang_id)
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.PEMBELIAN_ID',$pembelian_id);
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.BARANG_ID',$barang_id);
 
+    $this->db->where("T_T_T_PEMBELIAN_RINCIAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $akun = $this->db->get ();
     return $akun->result ();
   }
@@ -231,6 +314,9 @@ public function select_by_pembelian_id_and_barang_id($pembelian_id,$barang_id)
     $this->db->from('T_M_D_BARANG');
     $this->db->join("(select \"BARANG_ID\",sum(\"SISA_QTY\")\"SUM_SISA_QTY\" from \"T_T_T_PEMBELIAN_RINCIAN\" where \"SPECIAL_CASE_ID\"=0 and \"MARK_FOR_DELETE\"=false group by \"BARANG_ID\") as t_sum_1", 'T_M_D_BARANG.BARANG_ID = t_sum_1.BARANG_ID', 'left');
     $this->db->where('T_M_D_BARANG.BARANG_ID',$barang_id);
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $akun = $this->db->get ();
     return $akun->result ();
   }

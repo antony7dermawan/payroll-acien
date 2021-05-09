@@ -35,6 +35,12 @@
                 $this->load->model('m_t_t_t_retur_pembelian_rincian');
 
 
+                $this->load->model('m_t_t_t_pemakaian');
+                $this->load->model('m_t_t_t_pemakaian_rincian');
+                $this->load->model('m_t_t_t_retur_pemakaian');
+                $this->load->model('m_t_t_t_retur_pemakaian_rincian');
+
+
 
                 $this->load->model('m_lap_flow_barang_per_item');
                 
@@ -79,7 +85,7 @@
                   $spreadsheet->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
                   $spreadsheet->getActiveSheet()->mergeCells('A'.$row.':J'.$row);
                   $sheet = $spreadsheet->getActiveSheet();
-                  $sheet->setCellValue('A'.$row, 'CV Jaya Abadi');
+                  $sheet->setCellValue('A'.$row, 'Acien Inventory App');
                   $sheet->getStyle('A'.$row)->getAlignment()->setHorizontal('center');
 
 
@@ -270,7 +276,23 @@
                     {
                       $qty_retur_penjualan = floatval($value->SUM_QTY);
                     }
-                    $stok_awal = ($qty_pembelian + $qty_retur_penjualan ) - ($qty_penjualan+$qty_retur_pembelian);
+
+
+                    $read_select = $this->m_t_t_t_pemakaian_rincian->select_qty_before_date($date_from_laporan,$barang_id);
+                    foreach ($read_select as $key => $value) 
+                    {
+                      $qty_pemakaian = floatval($value->SUM_QTY);
+                    }
+
+
+                    $read_select = $this->m_t_t_t_retur_pemakaian_rincian->select_qty_before_date($date_from_laporan,$barang_id);
+                    foreach ($read_select as $key => $value) 
+                    {
+                      $qty_retur_pemakaian = floatval($value->SUM_QTY);
+                    }
+
+
+                    $stok_awal = ($qty_pembelian + $qty_retur_penjualan + $qty_retur_pemakaian) - ($qty_penjualan+$qty_retur_pembelian+$qty_pemakaian);
                   }
                   if($data_logic==1)
                   {
@@ -357,7 +379,7 @@
 
 
 
-                            if($r_table_code[$i]=='PENJUALAN')
+                            if($r_table_code[$i]=='PENJUALAN' or $r_table_code[$i]=='PEMAKAIAN')
                             {
                               $stok_awal = $stok_awal - $r_qty[$i];
                               $read_select = $this->m_t_t_t_penjualan->select_by_id($r_id[$i]);
@@ -389,7 +411,7 @@
 
 
 
-                            if($r_table_code[$i]=='RETUR_PENJUALAN')
+                            if($r_table_code[$i]=='RETUR_PENJUALAN' or $r_table_code[$i]=='RETUR_PEMAKAIAN')
                             {
                               $stok_awal = $stok_awal + $r_qty[$i];
                               $read_select = $this->m_t_t_t_retur_penjualan->select_by_id($r_id[$i]);

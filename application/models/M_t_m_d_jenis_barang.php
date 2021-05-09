@@ -14,6 +14,9 @@ public function select_id($id)
   $this->db->select('ID');
   $this->db->from('T_M_D_JENIS_BARANG');
   $this->db->where('JENIS_BARANG', $id);
+
+  $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
   $akun = $this->db->get ();
   return $akun->result ();
 }
@@ -23,6 +26,9 @@ public function select_option()
     $this->db->select('*');
     $this->db->from('T_M_D_JENIS_BARANG');
     $this->db->where("MARK_FOR_DELETE=false");
+
+    $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->order_by("JENIS_BARANG", "asc");
     $akun = $this->db->get ();
     return $akun->result ();
@@ -38,6 +44,9 @@ public function select_option()
     {
       $this->db->where('MARK_FOR_DELETE',FALSE);
     }
+
+    $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->order_by("ID", "asc");
     $akun = $this->db->get ();
     return $akun->result ();

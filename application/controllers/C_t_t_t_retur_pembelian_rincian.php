@@ -185,7 +185,8 @@ class C_t_t_t_retur_pembelian_rincian extends MY_Controller
         'UPDATED_BY' => '',
         'MARK_FOR_DELETE' => FALSE,
         'COMPANY_ID' => $this->session->userdata('company_id'),
-        'PEMBELIAN_RINCIAN_ID' => $r_pembelian_rincian_id
+        'PEMBELIAN_RINCIAN_ID' => $r_pembelian_rincian_id,
+        'POSTFIX_ID' => $this->session->userdata('postfix_id')
       );
 
       $this->m_t_t_t_retur_pembelian_rincian->tambah($data);

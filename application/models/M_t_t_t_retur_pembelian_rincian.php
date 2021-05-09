@@ -49,6 +49,10 @@ public function update($data, $id)
     }
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     
     $this->db->where('T_T_T_RETUR_PEMBELIAN_RINCIAN.RETUR_PEMBELIAN_ID',$retur_pembelian_id);
     $this->db->order_by("ID", "desc");
@@ -66,6 +70,10 @@ public function update($data, $id)
     $this->db->from('T_M_D_BARANG');
     $this->db->join("(select \"T_T_T_RETUR_PEMBELIAN_RINCIAN\".\"BARANG_ID\",sum(\"QTY\")\"SUM_QTY\" from \"T_T_T_RETUR_PEMBELIAN_RINCIAN\" LEFT OUTER JOIN \"T_T_T_RETUR_PEMBELIAN\" on \"T_T_T_RETUR_PEMBELIAN\".\"ID\"=\"T_T_T_RETUR_PEMBELIAN_RINCIAN\".\"RETUR_PEMBELIAN_ID\" where  \"T_T_T_RETUR_PEMBELIAN_RINCIAN\".\"MARK_FOR_DELETE\"=false and \"T_T_T_RETUR_PEMBELIAN\".\"DATE\"<'{$limit_date}' group by \"T_T_T_RETUR_PEMBELIAN_RINCIAN\".\"BARANG_ID\") as t_sum_1", 'T_M_D_BARANG.BARANG_ID = t_sum_1.BARANG_ID', 'left');
     $this->db->where('T_M_D_BARANG.BARANG_ID',$barang_id);
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $akun = $this->db->get ();
     return $akun->result ();
   }
@@ -108,6 +116,9 @@ public function update($data, $id)
 
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     
     $this->db->where('T_T_T_RETUR_PEMBELIAN_RINCIAN.ID',$id);
 
@@ -148,6 +159,10 @@ public function update($data, $id)
 
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.SPECIAL_CASE_ID',0);
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.MARK_FOR_DELETE',FALSE);
     $this->db->where('T_T_T_RETUR_PEMBELIAN.ID',$retur_pembelian_id);
@@ -192,6 +207,10 @@ public function update($data, $id)
 
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+    
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.BARANG_ID',$barang_id);
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.MARK_FOR_DELETE',false);
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.SPECIAL_CASE_ID',0);

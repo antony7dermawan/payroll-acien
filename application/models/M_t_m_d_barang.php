@@ -15,6 +15,8 @@ public function select_id($id)
   $this->db->select('ID');
   $this->db->from('T_M_D_BARANG');
   $this->db->where('BARANG', $id);
+  $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
   $akun = $this->db->get ();
   return $akun->result ();
 }
@@ -27,6 +29,8 @@ public function select_by_kategori($kategori_id)
   $this->db->where('KATEGORI_ID', $kategori_id);
   $this->db->where('MARK_FOR_DELETE',FALSE);
 
+  $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
   $this->db->order_by("BARANG", "asc");
   $akun = $this->db->get ();
   return $akun->result ();
@@ -38,6 +42,10 @@ public function select_by_id($barang_id)
   $this->db->from('T_M_D_BARANG');
   $this->db->where('BARANG_ID', $barang_id);
   $this->db->where('COMPANY_ID',$this->session->userdata('company_id'));
+
+  $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
   $akun = $this->db->get ();
   return $akun->result ();
 }
@@ -50,6 +58,9 @@ public function select_existing_barang_id_in_company($barang_id,$company_id)
   $this->db->from('T_M_D_BARANG');
   $this->db->where('BARANG_ID', $barang_id);
   $this->db->where('COMPANY_ID', $company_id);
+
+  $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
   $akun = $this->db->get ();
   return $akun->result ();
 }
@@ -59,6 +70,9 @@ public function select_by_id_id($id)
   $this->db->select('*');
   $this->db->from('T_M_D_BARANG');
   $this->db->where('ID', $id);
+
+  $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
   $akun = $this->db->get ();
   return $akun->result ();
 }
@@ -111,6 +125,7 @@ public function select_by_id_id($id)
 
     $this->db->where('T_M_D_BARANG.COMPANY_ID',$this->session->userdata('master_barang_company_id'));
 
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
 
     if($this->session->userdata('t_m_d_barang_delete_logic')==0)
     {
@@ -184,6 +199,8 @@ public function select_by_id_id($id)
 
     $this->db->where('T_M_D_BARANG.COMPANY_ID',$this->session->userdata('master_barang_company_id'));
 
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
 
 
     $this->db->where('T_M_D_BARANG.MARK_FOR_DELETE',FALSE);

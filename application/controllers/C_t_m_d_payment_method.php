@@ -58,7 +58,8 @@ class C_t_m_d_payment_method extends MY_Controller
       'PAYMENT_METHOD' => $payment_method,
       'CREATED_BY' => $this->session->userdata('username'),
       'UPDATED_BY' => '',
-      'MARK_FOR_DELETE' => FALSE
+      'MARK_FOR_DELETE' => FALSE,
+      'POSTFIX_ID' => $this->session->userdata('postfix_id')
     );
 
     $this->m_t_m_d_payment_method->tambah($data);

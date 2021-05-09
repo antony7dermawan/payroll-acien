@@ -53,6 +53,8 @@ public function update($data, $id)
     
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
 
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
 
     if($this->session->userdata('t_t_t_penjualan_delete_logic')==0)
     {
@@ -61,6 +63,10 @@ public function update($data, $id)
 
     
     $this->db->where('T_T_T_PENJUALAN_RINCIAN.PENJUALAN_ID',$penjualan_id);
+
+    
+
+
     $this->db->order_by("ID", "desc");
 
     $akun = $this->db->get ();
@@ -74,6 +80,10 @@ public function select_qty_before_date($limit_date,$barang_id)
     $this->db->from('T_M_D_BARANG');
     $this->db->join("(select \"T_T_T_PENJUALAN_RINCIAN\".\"BARANG_ID\",sum(\"QTY\")\"SUM_QTY\" from \"T_T_T_PENJUALAN_RINCIAN\" LEFT OUTER JOIN \"T_T_T_PENJUALAN\" on \"T_T_T_PENJUALAN\".\"ID\"=\"T_T_T_PENJUALAN_RINCIAN\".\"PENJUALAN_ID\" where  \"T_T_T_PENJUALAN_RINCIAN\".\"MARK_FOR_DELETE\"=false and \"T_T_T_PENJUALAN\".\"DATE\"<'{$limit_date}' group by \"T_T_T_PENJUALAN_RINCIAN\".\"BARANG_ID\") as t_sum_1", 'T_M_D_BARANG.BARANG_ID = t_sum_1.BARANG_ID', 'left');
     $this->db->where('T_M_D_BARANG.BARANG_ID',$barang_id);
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $akun = $this->db->get ();
     return $akun->result ();
   }
@@ -88,6 +98,8 @@ public function select_qty_before_date($limit_date,$barang_id)
 
     $this->db->where('T_T_T_PENJUALAN_RINCIAN.PENJUALAN_ID',$penjualan_id);
     $this->db->where('T_T_T_PENJUALAN_RINCIAN.BARANG_ID',$barang_id);
+
+    $this->db->where("T_T_T_PENJUALAN_RINCIAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
 
     $akun = $this->db->get ();
     return $akun->result ();
@@ -127,7 +139,7 @@ public function select_qty_before_date($limit_date,$barang_id)
     $this->db->join('T_M_D_BARANG', 'T_M_D_BARANG.BARANG_ID = T_T_T_PENJUALAN_RINCIAN.BARANG_ID', 'left');
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
-
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
     
     $this->db->where('T_T_T_PENJUALAN_RINCIAN.ID',$id);
 
@@ -161,6 +173,9 @@ public function select_qty_before_date($limit_date,$barang_id)
 
     
     $this->db->where('T_M_D_PELANGGAN.MARK_FOR_DELETE',false);
+
+    $this->db->where("T_M_D_PELANGGAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->order_by("PELANGGAN", "asc");
 
     $akun = $this->db->get ();
@@ -194,6 +209,10 @@ public function select_qty_before_date($limit_date,$barang_id)
 
     
     $this->db->where('T_M_D_SALES.MARK_FOR_DELETE',false);
+
+    $this->db->where("T_M_D_SALES.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->order_by("SALES", "asc");
 
     $akun = $this->db->get ();
@@ -231,6 +250,7 @@ public function select_qty_before_date($limit_date,$barang_id)
     $this->db->join('T_M_D_BARANG', 'T_M_D_BARANG.BARANG_ID = T_T_T_PEMBELIAN_RINCIAN.BARANG_ID', 'left');
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
 
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.MARK_FOR_DELETE',FALSE);
     $this->db->where('T_T_T_PENJUALAN.ID',$retur_pembelian_id);
@@ -274,6 +294,9 @@ public function select_qty_before_date($limit_date,$barang_id)
 
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+    
 
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.BARANG_ID',$barang_id);
     

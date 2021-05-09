@@ -70,7 +70,8 @@ class C_t_m_d_supplier extends MY_Controller
       'MARK_FOR_DELETE' => FALSE,
       'EMAIL' => $email,
       'NIK' => $nik,
-      'NPWP' => $npwp
+      'NPWP' => $npwp,
+      'POSTFIX_ID' => $this->session->userdata('postfix_id')
     );
 
     $this->m_t_m_d_supplier->tambah($data);

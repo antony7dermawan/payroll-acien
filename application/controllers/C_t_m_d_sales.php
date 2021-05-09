@@ -62,7 +62,8 @@ class C_t_m_d_sales extends MY_Controller
       'ALAMAT' => $alamat,
       'CREATED_BY' => $this->session->userdata('username'),
       'UPDATED_BY' => '',
-      'MARK_FOR_DELETE' => FALSE
+      'MARK_FOR_DELETE' => FALSE,
+      'POSTFIX_ID' => $this->session->userdata('postfix_id')
     );
 
     $this->m_t_m_d_sales->tambah($data);

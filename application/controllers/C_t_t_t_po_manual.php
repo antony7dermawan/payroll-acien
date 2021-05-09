@@ -97,7 +97,6 @@ class C_t_t_t_po_manual extends MY_Controller
       $inv_penjualan = $value->INV_PENJUALAN;
       $inv_retur_penjualan = $value->INV_RETUR_PENJUALAN;
       $inv_po = $value->INV_PO;
-      $inv_pinlok = $value->INV_PINLOK;
     }
 
 
@@ -125,7 +124,8 @@ class C_t_t_t_po_manual extends MY_Controller
         'PRINTED' => FALSE,
         'INV_SUPPLIER' => $inv_supplier,
         'T_STATUS' => 10, //ini kode po manual
-        'TABLE_CODE' => 'PEMBELIAN'
+        'TABLE_CODE' => 'PEMBELIAN',
+        'POSTFIX_ID' => $this->session->userdata('postfix_id')
       );
 
       $this->m_t_t_t_po_manual->tambah($data);

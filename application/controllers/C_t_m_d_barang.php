@@ -135,7 +135,8 @@ class C_t_m_d_barang extends MY_Controller
           'SATUAN_ID' => $satuan_id,
           'COMPANY_ID' => $company_id,
           'MAXIMUM_STOK' => $maximum_stok,
-          'JENIS_BARANG_ID' => $jenis_barang_id
+          'JENIS_BARANG_ID' => $jenis_barang_id,
+          'POSTFIX_ID' => $this->session->userdata('postfix_id')
         );
 
         $this->m_t_m_d_barang->tambah($data);
@@ -194,7 +195,8 @@ class C_t_m_d_barang extends MY_Controller
       'SATUAN_ID' => $satuan_id,
       'COMPANY_ID' => $this->session->userdata('company_id'),
       'MAXIMUM_STOK' => $maximum_stok,
-      'JENIS_BARANG_ID' => $jenis_barang_id
+      'JENIS_BARANG_ID' => $jenis_barang_id,
+      'POSTFIX_ID' => $this->session->userdata('postfix_id')
     );
 
     $this->m_t_m_d_barang->tambah($data);

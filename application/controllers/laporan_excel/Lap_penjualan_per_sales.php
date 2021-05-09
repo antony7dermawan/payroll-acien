@@ -64,7 +64,7 @@
                   $spreadsheet->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
                   $spreadsheet->getActiveSheet()->mergeCells('A'.$row.':J'.$row);
                   $sheet = $spreadsheet->getActiveSheet();
-                  $sheet->setCellValue('A'.$row, 'CV Jaya Abadi');
+                  $sheet->setCellValue('A'.$row, 'Acien Inventory App');
                   $sheet->getStyle('A'.$row)->getAlignment()->setHorizontal('center');
 
 

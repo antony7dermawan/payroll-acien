@@ -16,6 +16,9 @@ public function select_inv_pembelian()
     $this->db->select("ID");
     $this->db->select("INV");
     $this->db->from('T_T_T_PEMBELIAN');
+
+    $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->order_by("ID", "desc");
     $akun = $this->db->get ();
     return $akun->result ();
@@ -67,6 +70,10 @@ public function select_inv_pembelian()
 
 
     $this->db->where("T_T_T_PEMBELIAN.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_T_T_PEMBELIAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->order_by("ID", "desc");
 
     $akun = $this->db->get ();
@@ -115,6 +122,8 @@ public function select_inv_pembelian()
 
     
     $this->db->where('T_T_T_PEMBELIAN.ID',$id);
+
+    $this->db->where("T_T_T_PEMBELIAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
     
 
     $akun = $this->db->get ();
@@ -129,6 +138,9 @@ public function select_inv_pembelian()
     $this->db->select("INV_INT");
     $this->db->from('T_T_T_PEMBELIAN');
     $this->db->where("COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->where("DATE>='{$this_year}'");
     $this->db->order_by("ID", "desc");
 

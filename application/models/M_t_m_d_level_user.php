@@ -15,6 +15,9 @@ public function select_id($id)
   $this->db->select('ID');
   $this->db->from('T_M_D_LEVEL_USER');
   $this->db->where('LEVEL_USER', $id);
+
+  
+
   $akun = $this->db->get ();
   return $akun->result ();
 }
@@ -32,6 +35,9 @@ public function select_id($id)
     {
       $this->db->where('MARK_FOR_DELETE',FALSE);
     }
+
+    
+
     $this->db->order_by("ID", "asc");
     $akun = $this->db->get ();
     return $akun->result ();

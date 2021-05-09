@@ -24,6 +24,8 @@ public function select_inv_po_auto_in_that_day($date,$supplier_id)
     $this->db->where("INV_SUPPLIER=''");
     $this->db->where("DATE='{$date}'");
 
+    $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->order_by("ID", "desc");
     $akun = $this->db->get ();
     return $akun->result ();
@@ -38,6 +40,9 @@ public function select_inv_pembelian()
     $this->db->select("INV");
     $this->db->from('T_T_T_PEMBELIAN');
     $this->db->where('MARK_FOR_DELETE',false);
+
+    $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->order_by("ID", "desc");
     $akun = $this->db->get ();
     return $akun->result ();
@@ -101,6 +106,9 @@ public function select_range_date($from_date,$to_date,$kredit_logic)
     $this->db->where("T_T_T_PEMBELIAN.DATE<='{$to_date}' and T_T_T_PEMBELIAN.DATE>='{$from_date}'");
 
     $this->db->where("T_T_T_PEMBELIAN.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_T_T_PEMBELIAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     $this->db->order_by("ID", "desc");
 
     $akun = $this->db->get ();
@@ -153,6 +161,10 @@ public function select_range_date($from_date,$to_date,$kredit_logic)
     $this->db->where("T_T_T_PEMBELIAN.DATE<='{$date_pembelian}' and T_T_T_PEMBELIAN.DATE>='{$date_before}'");
 
     $this->db->where("T_T_T_PEMBELIAN.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_T_T_PEMBELIAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->order_by("ID", "desc");
 
     $akun = $this->db->get ();
@@ -206,6 +218,8 @@ public function select_range_date($from_date,$to_date,$kredit_logic)
 
     
     $this->db->where('T_T_T_PEMBELIAN.ID',$id);
+
+    $this->db->where("T_T_T_PEMBELIAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
     
 
     $akun = $this->db->get ();
@@ -221,6 +235,9 @@ public function select_range_date($from_date,$to_date,$kredit_logic)
     $this->db->from('T_T_T_PEMBELIAN');
     $this->db->where("COMPANY_ID={$this->session->userdata('company_id')}");
     $this->db->where("DATE>='{$this_year}'");
+
+    $this->db->where("T_T_T_PEMBELIAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+    
     $this->db->order_by("ID", "desc");
 
     $akun = $this->db->get ();

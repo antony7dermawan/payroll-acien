@@ -14,6 +14,9 @@ public function select_id($id)
   $this->db->select('ID');
   $this->db->from('T_M_D_PAYMENT_METHOD');
   $this->db->where('PAYMENT_METHOD', $id);
+
+
+
   $akun = $this->db->get ();
   return $akun->result ();
 }
@@ -31,6 +34,8 @@ public function select_id($id)
     {
       $this->db->where('MARK_FOR_DELETE',FALSE);
     }
+
+
 
     $this->db->order_by("ID", "asc");
     $akun = $this->db->get ();

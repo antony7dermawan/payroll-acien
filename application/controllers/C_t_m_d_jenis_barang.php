@@ -58,7 +58,8 @@ class C_t_m_d_jenis_barang extends MY_Controller
       'JENIS_BARANG' => $jenis_barang,
       'CREATED_BY' => $this->session->userdata('username'),
       'UPDATED_BY' => '',
-      'MARK_FOR_DELETE' => FALSE
+      'MARK_FOR_DELETE' => FALSE,
+      'POSTFIX_ID' => $this->session->userdata('postfix_id')
     );
 
     $this->m_t_m_d_jenis_barang->tambah($data);

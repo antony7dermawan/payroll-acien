@@ -26,6 +26,10 @@ public function select_sisa_qty($barang_id)
     
 
     $this->db->where("COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->where('BARANG_ID',$barang_id);
     $this->db->where('MARK_FOR_DELETE',false);
 
@@ -68,10 +72,15 @@ public function select_barang_with_supplier($barang_id)
     $this->db->join('T_T_T_PEMBELIAN', 'T_T_T_PEMBELIAN.ID = T_T_T_PEMBELIAN_RINCIAN.PEMBELIAN_ID', 'left');
 
     $this->db->where("T_T_T_PEMBELIAN_RINCIAN.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_T_T_PEMBELIAN_RINCIAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->where('T_M_D_BARANG.BARANG_ID',$barang_id);
 
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
     
     $this->db->order_by("ID", "desc");
 
@@ -124,6 +133,9 @@ public function select_barang_with_supplier($barang_id)
 
 
     $this->db->where("T_M_D_BARANG.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     
     $this->db->where('T_T_T_PEMBELIAN_RINCIAN.PEMBELIAN_ID',$pembelian_id);
     $this->db->order_by("ID", "desc");
@@ -142,6 +154,10 @@ public function select_barang_with_supplier($barang_id)
     $this->db->from('T_M_D_BARANG');
     $this->db->join("(select \"BARANG_ID\",sum(\"SISA_QTY\")\"SUM_SISA_QTY\" from \"T_T_T_PEMBELIAN_RINCIAN\" where \"SPECIAL_CASE_ID\"=0 and \"MARK_FOR_DELETE\"=false group by \"BARANG_ID\") as t_sum_1", 'T_M_D_BARANG.BARANG_ID = t_sum_1.BARANG_ID', 'left');
     $this->db->where('T_M_D_BARANG.BARANG_ID',$barang_id);
+
+    $this->db->where("T_M_D_BARANG.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+    
     $akun = $this->db->get ();
     return $akun->result ();
   }

@@ -6,7 +6,7 @@
     <!-- Menampilkan notif !-->
     <?= $this->session->flashdata('notif') ?>
     <!-- Tombol untuk menambah data akun !-->
-    <button data-toggle="modal" data-target="#addModal" class="btn btn-success waves-effect waves-light">New Data</button>
+    
 
     <div class="table-responsive dt-responsive">
       <table id="dom-jqry" class="table table-striped table-bordered nowrap">
@@ -14,7 +14,7 @@
           <tr>
             <th>ID</th>
             <th>Payment Method</th>
-            <th>Action</th>
+
           </tr>
         </thead>
         <tbody>
@@ -27,19 +27,7 @@
               echo "<td>".$value->ID."</td>";
               echo "<td>".$value->PAYMENT_METHOD."</td>";
             
-              echo "<td>";
-               
-              echo "<a href='javascript:void(0);' data-toggle='modal' data-target='#Modal_Edit' class='btn-edit' data-id='".$value->ID."'>";
-                echo "<i class='icon feather icon-edit f-w-600 f-16 m-r-15 text-c-green'></i>";
-              echo "</a>";
-
-              echo "<a href='".site_url('c_t_m_d_payment_method/delete/' . $value->ID)."' ";
-              ?>
-              onclick="return confirm('Apakah kamu yakin ingin menghapus data ini?')"
-              <?php
-              echo "> <i class='feather icon-trash-2 f-w-600 f-16 text-c-red'></i></a>";
-
-              echo "</td>";
+             
 
 
               echo "</tr>";
@@ -51,18 +39,7 @@
               echo "<td><s>".$value->ID."</s></td>";
               echo "<td><s>".$value->PAYMENT_METHOD."</s></td>";
             
-              echo "<td>";
-               
-              
-
-              echo "<a href='".site_url('c_t_m_d_payment_method/undo_delete/' . $value->ID)."' ";
-              ?>
-              onclick="return confirm('Apakah kamu yakin ingin mengembalikan data ini?')"
-              <?php
-              echo "> <i class='fa fa-refresh f-w-600 f-16 text-c-red'></i></a>";
-
-              echo ' '.$value->UPDATED_BY;
-              echo "</td>";
+             
 
 
               echo "</tr>";

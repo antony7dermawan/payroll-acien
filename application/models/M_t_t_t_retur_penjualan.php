@@ -80,6 +80,10 @@ public function select_range_date($from_date,$to_date)
 
     
     $this->db->where("T_T_T_RETUR_PENJUALAN.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_T_T_RETUR_PENJUALAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->order_by("ID", "desc");
 
     $akun = $this->db->get ();
@@ -126,6 +130,10 @@ public function select_range_date($from_date,$to_date)
 
     
     $this->db->where("T_T_T_RETUR_PENJUALAN.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_T_T_RETUR_PENJUALAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->order_by("ID", "desc");
 
     $akun = $this->db->get ();
@@ -190,6 +198,8 @@ public function select_range_date($from_date,$to_date)
     $this->db->where('T_T_T_RETUR_PENJUALAN.ID',$id);
     $this->db->where("T_T_T_RETUR_PENJUALAN.COMPANY_ID={$this->session->userdata('company_id')}");
 
+    $this->db->where("T_T_T_RETUR_PENJUALAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
     
 
     $akun = $this->db->get ();
@@ -204,6 +214,10 @@ public function select_range_date($from_date,$to_date)
     $this->db->select("INV_INT");
     $this->db->from('T_T_T_RETUR_PENJUALAN');
     $this->db->where("COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
     $this->db->where("DATE>='{$this_year}'");
     $this->db->order_by("ID", "desc");
 

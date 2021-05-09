@@ -91,7 +91,6 @@ class C_t_t_t_retur_pembelian extends MY_Controller
       $inv_penjualan = $value->INV_PENJUALAN;
       $inv_retur_penjualan = $value->INV_RETUR_PENJUALAN;
       $inv_po = $value->INV_PO;
-      $inv_pinlok = $value->INV_PINLOK;
     }
 
 
@@ -115,7 +114,8 @@ class C_t_t_t_retur_pembelian extends MY_Controller
         'UPDATED_BY' => '',
         'MARK_FOR_DELETE' => FALSE,
         'PRINTED' => FALSE,
-        'TABLE_CODE' => 'RETUR_PEMBELIAN'
+        'TABLE_CODE' => 'RETUR_PEMBELIAN',
+        'POSTFIX_ID' => $this->session->userdata('postfix_id')
       );
 
       $this->m_t_t_t_retur_pembelian->tambah($data);

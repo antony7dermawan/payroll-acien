@@ -36,6 +36,7 @@ class Auth extends MY_Controller {
                     'password'=>$user->PASSWORD, // Buat session nama
           'level_user_id'=>$user->LEVEL_USER_ID, // Buat session role
           'company_id'=>$user->COMPANY_ID,
+          'postfix_id'=>$user->POSTFIX_ID,
           'master_barang_kategori_id'=>0,
           'master_barang_company_id'=>1,
           'date_pembelian'=>date('Y-m-d'),
@@ -48,6 +49,8 @@ class Auth extends MY_Controller {
           'date_to_dashboard_2'=>date('Y-m-d'),
           'date_po_auto'=>date('Y-m-d'),
           'date_po_manual'=>date('Y-m-d'),
+          'date_pemakaian'=>date('Y-m-d'),
+          'date_retur_pemakaian'=>date('Y-m-d'),
           
 
 

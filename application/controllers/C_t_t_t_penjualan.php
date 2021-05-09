@@ -120,7 +120,6 @@ class C_t_t_t_penjualan extends MY_Controller
       $inv_penjualan = $value->INV_PENJUALAN;
       $inv_retur_penjualan = $value->INV_RETUR_PENJUALAN;
       $inv_po = $value->INV_PO;
-      $inv_pinlok = $value->INV_PINLOK;
     }
 
     $live_inv = $inv_penjualan.date('y-m').'.'.sprintf('%05d', $inv_int);
@@ -150,7 +149,8 @@ class C_t_t_t_penjualan extends MY_Controller
         'LOKASI_ID' => $lokasi_id,
         'INV_HEAD' => $inv_head,
         'TABLE_CODE' => 'PENJUALAN',
-        'ENABLE_EDIT' => 1
+        'ENABLE_EDIT' => 1,
+        'POSTFIX_ID' => $this->session->userdata('postfix_id')
       );
 
       $this->m_t_t_t_penjualan->tambah($data);

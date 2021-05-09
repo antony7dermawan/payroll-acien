@@ -183,7 +183,8 @@ class C_t_t_t_retur_penjualan_rincian extends MY_Controller
         'UPDATED_BY' => '',
         'MARK_FOR_DELETE' => FALSE,
         'COMPANY_ID' => $this->session->userdata('company_id'),
-        'PENJUALAN_RINCIAN_ID' => $r_penjualan_rincian_id
+        'PENJUALAN_RINCIAN_ID' => $r_penjualan_rincian_id,
+        'POSTFIX_ID' => $this->session->userdata('postfix_id')
       );
 
       $this->m_t_t_t_retur_penjualan_rincian->tambah($data);

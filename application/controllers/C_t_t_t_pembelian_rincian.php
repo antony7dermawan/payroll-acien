@@ -114,7 +114,8 @@ class C_t_t_t_pembelian_rincian extends MY_Controller
         'CREATED_BY' => $this->session->userdata('username'),
         'UPDATED_BY' => '',
         'MARK_FOR_DELETE' => FALSE,
-        'COMPANY_ID' => $this->session->userdata('company_id')
+        'COMPANY_ID' => $this->session->userdata('company_id'),
+        'POSTFIX_ID' => $this->session->userdata('postfix_id')
       );
 
       $this->m_t_t_t_pembelian_rincian->tambah($data);
