@@ -32,6 +32,14 @@ class C_t_t_t_penjualan extends MY_Controller
     $this->session->set_userdata('t_m_d_supir_delete_logic', '0');
     $this->session->set_userdata('t_m_d_lokasi_delete_logic', '0');
 
+
+    if($this->session->userdata('date_penjualan')=='')
+    {
+      $date_penjualan = date('Y-m-d');
+      $this->session->set_userdata('date_penjualan', $date_penjualan);
+    }
+
+    
     $data = [
       "c_t_t_t_penjualan" => $this->m_t_t_t_penjualan->select($this->session->userdata('date_penjualan')),
 

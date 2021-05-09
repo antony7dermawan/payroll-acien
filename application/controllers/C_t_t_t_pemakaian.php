@@ -32,6 +32,11 @@ class C_t_t_t_pemakaian extends MY_Controller
     $this->session->set_userdata('t_m_d_supir_delete_logic', '0');
     $this->session->set_userdata('t_m_d_lokasi_delete_logic', '0');
 
+    if($this->session->userdata('date_pemakaian')=='')
+    {
+      $date_pemakaian = date('Y-m-d');
+      $this->session->set_userdata('date_pemakaian', $date_pemakaian);
+    }
     $data = [
       "c_t_t_t_pemakaian" => $this->m_t_t_t_pemakaian->select($this->session->userdata('date_pemakaian')),
 
