@@ -7,7 +7,7 @@ if($this->session->flashdata('message')){ // Jika ada
 
 <form class="login100-form validate-form flex-sb flex-w" method="post" action="<?php echo base_url('auth/login'); ?>">
 					<span class="login100-form-title p-b-32">
-						Integrated Inventory System
+						Inventory System
 					</span>
 
 					<span class="txt1 p-b-11">
@@ -35,7 +35,7 @@ if($this->session->flashdata('message')){ // Jika ada
 						</button>
 
 
-						
+
 					</div>
 
 				</form>
