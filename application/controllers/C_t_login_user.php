@@ -66,33 +66,56 @@ class C_t_login_user extends MY_Controller
 
     //Dikiri nama kolom pada database, dikanan hasil yang kita tangkap nama formnya.
     if ($password1 != $password1c or $password1 == '') {
-      $this->session->set_flashdata('notif', '<div class="alert alert-danger icons-alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="icofont icofont-close-line-circled"></i></button><p><strong>Gagal Membuat User Baru!</strong> Silahkan Mengulang!</p></div>');
+      $this->session->set_flashdata('notif', '<div class="alert alert-danger icons-alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="icofont icofont-close-line-circled"></i></button><p><strong>Gagal Membuat User Baru! Password Tidak Sama</strong> Silahkan Mengulang!</p></div>');
     } 
 
     else {
 
 
-      $read_select = $this->m_t_m_d_company->select_id($company);
+      $read_select = $this->m_t_m_d_postfix->select_by_id(); //id nya dalam session uda di model
       foreach ($read_select as $key => $value) {
-        $company_id = $value->ID;
+        $company_id_qty = $value->COMPANY_ID_QTY;
+        $barang_id_qty = $value->BARANG_ID_QTY;
+        $postfix = $value->POSTFIX;
       }
-    
 
-      $data = array(
-        'USERNAME' => $username,
-        'PASSWORD' => $password1,
-        'NAME' => $username,
-        'COMPANY_ID' => $company_id,
-        'LEVEL_USER_ID' => $level_user_id,
-        'CREATED_BY' => $this->session->userdata('username'),
-        'UPDATED_BY' => '',
-        'MARK_FOR_DELETE' => FALSE,
-        'POSTFIX_ID' => $this->session->userdata('postfix_id')
-      );
+      //select existing username
 
-      $this->m_t_login_user->tambah($data);
+      $username = $username.'@'.$postfix;
 
-      $this->session->set_flashdata('notif', '<div class="alert alert-info icons-alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <i class="icofont icofont-close-line-circled"></i></button><p><strong>Data Berhasil Ditambahkan!</strong></p></div>');
+
+      $existing_logic_username = 0;
+      $read_select = $this->m_t_login_user->select_existing_username($username); //id nya dalam session uda di model
+      foreach ($read_select as $key => $value) {
+        $existing_logic_username = 1;
+      }
+
+
+      if($existing_logic_username == 0)
+      {
+        $data = array(
+          'USERNAME' => $username,
+          'PASSWORD' => $password1,
+          'NAME' => $name,
+          'COMPANY_ID' => $company_id,
+          'LEVEL_USER_ID' => $level_user_id,
+          'CREATED_BY' => $this->session->userdata('username'),
+          'UPDATED_BY' => '',
+          'MARK_FOR_DELETE' => FALSE,
+          'POSTFIX_ID' => $this->session->userdata('postfix_id')
+        );
+
+        $this->m_t_login_user->tambah($data);
+
+        $this->session->set_flashdata('notif', '<div class="alert alert-info icons-alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <i class="icofont icofont-close-line-circled"></i></button><p><strong>Data Berhasil Ditambahkan!</strong></p></div>');
+      }
+
+      if($existing_logic_username == 1)
+      {
+        $this->session->set_flashdata('notif', '<div class="alert alert-danger icons-alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="icofont icofont-close-line-circled"></i></button><p><strong>Gagal Membuat User Baru! Username Sudah Digunakan!</strong> Silahkan Mengulang!</p></div>');
+      }
+
+      
     }
 
     redirect('c_t_login_user');

@@ -23,6 +23,11 @@ public function select_id($id)
 
 
 
+
+
+
+
+
   public function select_by_company_id()
   {
     $this->db->select('*');

@@ -11,7 +11,15 @@ public function update($data, $id)
 }
 
 
+public function select_existing_username($username)
+{
+  $this->db->select('ID');
+  $this->db->from('T_LOGIN_USER');
+  $this->db->where("USERNAME='{$username}'");
 
+  $akun = $this->db->get ();
+  return $akun->result ();
+}
 
 
 
