@@ -28,6 +28,7 @@ public function update($data, $id)
     $this->db->select("T_T_T_PENJUALAN_RINCIAN.DISKON_P_1");
     $this->db->select("T_T_T_PENJUALAN_RINCIAN.DISKON_P_2");
     $this->db->select("T_T_T_PENJUALAN_RINCIAN.DISKON_HARGA");
+    $this->db->select("T_T_T_PENJUALAN_RINCIAN.MODAL");
 
 
 
@@ -120,6 +121,7 @@ public function select_qty_before_date($limit_date,$barang_id)
     $this->db->select("T_T_T_PENJUALAN_RINCIAN.CREATED_BY");
     $this->db->select("T_T_T_PENJUALAN_RINCIAN.UPDATED_BY");
     $this->db->select("T_T_T_PENJUALAN_RINCIAN.MARK_FOR_DELETE");
+    $this->db->select("T_T_T_PENJUALAN_RINCIAN.MODAL");
 
 
 

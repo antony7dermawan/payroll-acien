@@ -148,6 +148,41 @@ class C_t_t_t_penjualan_rincian extends MY_Controller
 
     if($barang_id!=0 and $qty<=$sisa_qty_tt)
     {
+
+
+      //..............................................kurangin stok pembelian rincian
+      $vivo_qty = $qty;
+      $total_modal = 0;
+      $read_select = $this->m_t_t_t_pembelian_rincian->select_sisa_qty($barang_id);
+      foreach ($read_select as $key => $value) 
+      {
+        if($vivo_qty<=$value->SISA_QTY)
+        {
+          $total_modal = $total_modal + ($vivo_qty*floatval($value->HARGA));
+
+          $live_sisa_qty = $value->SISA_QTY - $vivo_qty;
+          $data = array(
+            'SISA_QTY' => $live_sisa_qty
+          );
+          $this->m_t_t_t_pembelian_rincian->update($data,$value->ID);
+          $vivo_qty = 0;
+        }
+
+        if($vivo_qty>$value->SISA_QTY)
+        { 
+          $total_modal = $total_modal + ($value->SISA_QTY*floatval($value->HARGA));
+
+          $live_sisa_qty = 0;
+          $data = array(
+            'SISA_QTY' => $live_sisa_qty
+          );
+          $this->m_t_t_t_pembelian_rincian->update($data,$value->ID);
+          $vivo_qty = $vivo_qty - $value->SISA_QTY;
+        }
+      }
+
+
+
       $data = array(
         'PENJUALAN_ID' => $penjualan_id,
         'BARANG_ID' => $barang_id,
@@ -169,37 +204,15 @@ class C_t_t_t_penjualan_rincian extends MY_Controller
         'UPDATED_BY' => '',
         'MARK_FOR_DELETE' => FALSE,
         'COMPANY_ID' => $this->session->userdata('company_id'),
-        'POSTFIX_ID' => $this->session->userdata('postfix_id')
+        'POSTFIX_ID' => $this->session->userdata('postfix_id'),
+        'MODAL' => $total_modal
         
       );
 
       $this->m_t_t_t_penjualan_rincian->tambah($data);
 
-      //..............................................kurangin stok pembelian rincian
-      $vivo_qty = $qty;
-      $read_select = $this->m_t_t_t_pembelian_rincian->select_sisa_qty($barang_id);
-      foreach ($read_select as $key => $value) 
-      {
-        if($vivo_qty<=$value->SISA_QTY)
-        {
-          $live_sisa_qty = $value->SISA_QTY - $vivo_qty;
-          $data = array(
-            'SISA_QTY' => $live_sisa_qty
-          );
-          $this->m_t_t_t_pembelian_rincian->update($data,$value->ID);
-          $vivo_qty = 0;
-        }
+      
 
-        if($vivo_qty>$value->SISA_QTY)
-        {
-          $live_sisa_qty = 0;
-          $data = array(
-            'SISA_QTY' => $live_sisa_qty
-          );
-          $this->m_t_t_t_pembelian_rincian->update($data,$value->ID);
-          $vivo_qty = $vivo_qty - $value->SISA_QTY;
-        }
-      }
 
       //..............................................kurangin stok pembelian rincian end
 

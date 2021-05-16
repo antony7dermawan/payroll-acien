@@ -52,6 +52,14 @@
             <th>Harga</th>
             <th>Sub Total</th>
 
+            <?php
+            if($level_user_id==1)
+            {
+              echo "<th>Modal</th>";
+            }
+
+            ?>
+
             <th>Action</th>
           </tr>
         </thead>
@@ -77,6 +85,11 @@
               echo "<td>" . number_format(floatval(round($value->HARGA*100))/100) . "</td>";
               echo "<td>" . number_format(floatval(round($value->SUB_TOTAL*100))/100) . "</td>";
 
+
+              if($level_user_id==1)
+              {
+                echo "<td>" . number_format(floatval(round($value->MODAL*100))/100) . "</td>";
+              } 
               
               echo "<td>";
               
@@ -116,6 +129,11 @@
               echo "<td><s>" . number_format(floatval(round($value->HARGA*100))/100) . "</s></td>";
               echo "<td><s>" . number_format(floatval(round($value->SUB_TOTAL*100))/100) . "</s></td>";
 
+
+              if($level_user_id==1)
+              {
+                echo "<td><s>" . number_format(floatval(round($value->MODAL*100))/100) . "</s></td>";
+              }
               
               echo "<td>";
              

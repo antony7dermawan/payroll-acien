@@ -65,10 +65,11 @@
                   }
 
                   $total_penjualan = 0;
+                  $total_modal= 0;
                   foreach ($sum_penjualan as $key => $value) {
                     $total_penjualan = $total_penjualan + $value->SUM_SUB_TOTAL;
-
-                  }
+                    $total_modal = $total_modal + $value->SUM_MODAL;
+                  } 
 
 
                   $total_retur_penjualan = 0;
@@ -86,7 +87,7 @@
 
 
 
-                  $laba_bersih = (intval($total_penjualan)+intval($total_retur_pembelian)+intval($total_pemakaian))-(intval($total_pembelian)+intval($total_retur_penjualan)+intval($total_retur_pemakaian));
+                  $laba_bersih = (intval($total_penjualan))-(intval($total_modal)+intval($total_retur_penjualan));
                   echo "<div class='col-xl-5 col-md-6'>";
                   echo "<div class='card prod-p-card card-blue'>";
                   echo "<div class='card-body'>";

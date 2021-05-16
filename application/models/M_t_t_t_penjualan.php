@@ -308,7 +308,7 @@ public function select_range_date($from_date,$to_date,$kredit_logic,$sales_id,$p
 
     $this->db->select("SUM_SUB_TOTAL");
 
-   
+    $this->db->select("SUM_MODAL");
 
 
     $this->db->from('T_T_T_PENJUALAN');
@@ -320,6 +320,9 @@ public function select_range_date($from_date,$to_date,$kredit_logic,$sales_id,$p
 
 
     $this->db->join("(select \"PENJUALAN_ID\",sum(\"SUB_TOTAL\")\"SUM_SUB_TOTAL\" from \"T_T_T_PENJUALAN_RINCIAN\" where \"MARK_FOR_DELETE\"=false group by \"PENJUALAN_ID\") as t_sum_1", 'T_T_T_PENJUALAN.ID = t_sum_1.PENJUALAN_ID', 'left');
+
+
+    $this->db->join("(select \"PENJUALAN_ID\",sum(\"MODAL\")\"SUM_MODAL\" from \"T_T_T_PENJUALAN_RINCIAN\" where \"MARK_FOR_DELETE\"=false group by \"PENJUALAN_ID\") as t_sum_2", 'T_T_T_PENJUALAN.ID = t_sum_2.PENJUALAN_ID', 'left');
 
     
 
