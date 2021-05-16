@@ -8,6 +8,7 @@
         $inv = $value->INV;
 
         $t_status = $value->T_STATUS;
+        $mark_logic = $value->MARK_FOR_DELETE;
       }
 
 
@@ -26,7 +27,7 @@
     <!-- Tombol untuk menambah data akun !-->
 
     <?php
-    if($t_status != 2)
+    if($t_status != 2 and $mark_logic=='f')
     {
       ?>
       <button data-toggle="modal" data-target="#addModal" class="btn btn-success waves-effect waves-light">New Data</button>

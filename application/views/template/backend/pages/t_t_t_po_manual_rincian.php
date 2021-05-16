@@ -7,6 +7,7 @@
       foreach ($c_t_t_t_po_manual_by_id as $key => $value) {
         $inv = $value->INV;
         $t_status = $value->T_STATUS;
+        $mark_logic = $value->MARK_FOR_DELETE;
       }
 
 
@@ -24,7 +25,7 @@
     <a href="<?= base_url("c_t_t_t_po_manual"); ?>" class="btn waves-effect waves-light btn-inverse"><i class="icofont icofont-double-left"></i>Back</a>
     <!-- Tombol untuk menambah data akun !-->
     <?php
-    if($t_status != 1)
+    if($t_status != 1 and $mark_logic=='f')
     {
       ?>
       <button data-toggle="modal" data-target="#addModal" class="btn btn-success waves-effect waves-light">New Data</button>

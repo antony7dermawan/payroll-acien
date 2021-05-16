@@ -6,6 +6,7 @@
       $level_user_id = $this->session->userdata('level_user_id');
       foreach ($c_t_t_t_retur_penjualan_by_id as $key => $value) {
         $inv = $value->INV;
+        $mark_logic = $value->MARK_FOR_DELETE;
       }
 
 
@@ -22,7 +23,12 @@
 
     <a href="<?= base_url("c_t_t_t_retur_penjualan"); ?>" class="btn waves-effect waves-light btn-inverse"><i class="icofont icofont-double-left"></i>Back</a>
     <!-- Tombol untuk menambah data akun !-->
-    <button data-toggle="modal" data-target="#addModal" class="btn btn-success waves-effect waves-light">New Data</button>
+    <?php
+    if($mark_logic=='f')
+    {
+      echo "<button data-toggle='modal' data-target='#addModal' class='btn btn-success waves-effect waves-light'>New Data</button>";
+    }
+    ?>
 
     <div class="table-responsive dt-responsive">
       <table id="dom-jqry" class="table table-striped table-bordered nowrap">

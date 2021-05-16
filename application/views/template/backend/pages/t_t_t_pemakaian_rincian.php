@@ -13,6 +13,7 @@
       foreach ($c_t_t_t_pemakaian_by_id as $key => $value) {
         $inv = $value->INV;
         $enable_edit = $value->ENABLE_EDIT;
+        $mark_logic = $value->MARK_FOR_DELETE;
       }
 
 
@@ -30,7 +31,7 @@
     <a href="<?= base_url("c_t_t_t_pemakaian"); ?>" class="btn waves-effect waves-light btn-inverse"><i class="icofont icofont-double-left"></i>Back</a>
     <!-- Tombol untuk menambah data akun !-->
     <?php
-    if($enable_edit==1)
+    if($enable_edit==1 and $mark_logic=='f')
     {
       echo "<button data-toggle='modal' data-target='#addModal' class='btn btn-success waves-effect waves-light'>New Data</button>";
     }
