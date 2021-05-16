@@ -36,7 +36,7 @@ class C_t_m_d_barang extends MY_Controller
       "c_t_m_d_jenis_barang" => $this->m_t_m_d_jenis_barang->select_option(),
 
       "title" => "Master Barang",
-      "description" => "Hati Hati dalam mengisi master data"
+      "description" => "Please contact Vendor for more Barang ID"
     ];
     $this->render_backend('template/backend/pages/t_m_d_barang', $data);
   }

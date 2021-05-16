@@ -173,6 +173,48 @@ public function select_range_date($from_date,$to_date,$kredit_logic)
 
 
 
+
+
+
+
+
+
+  public function select_sum_by_date($from_date,$to_date)
+  {
+    
+
+
+    $this->db->select("SUM_SUB_TOTAL");
+
+   
+
+
+    $this->db->from('T_T_T_PEMBELIAN');
+
+
+
+    $this->db->join("(select \"PEMBELIAN_ID\",sum(\"SUB_TOTAL\")\"SUM_SUB_TOTAL\" from \"T_T_T_PEMBELIAN_RINCIAN\" where \"MARK_FOR_DELETE\"=false group by \"PEMBELIAN_ID\") as t_sum_1", 'T_T_T_PEMBELIAN.ID = t_sum_1.PEMBELIAN_ID', 'left');
+
+    
+
+
+    $this->db->where("(T_T_T_PEMBELIAN.T_STATUS=0 or T_T_T_PEMBELIAN.T_STATUS=1 or T_T_T_PEMBELIAN.T_STATUS=2)");
+
+    $this->db->where("T_T_T_PEMBELIAN.DATE<='{$to_date}' and T_T_T_PEMBELIAN.DATE>='{$from_date}'");
+
+    $this->db->where("T_T_T_PEMBELIAN.COMPANY_ID={$this->session->userdata('company_id')}");
+
+    $this->db->where("T_T_T_PEMBELIAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+
+
+    $akun = $this->db->get ();
+    return $akun->result ();
+  }
+
+
+
+
+
   public function select_by_id($id)
   {
     $this->db->select("T_T_T_PEMBELIAN.ID");

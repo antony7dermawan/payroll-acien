@@ -47,6 +47,8 @@ class Auth extends MY_Controller {
           'date_to_dashboard_1'=>date('Y-m-d'),
           'date_from_dashboard_2'=>date('Y-m-d'),
           'date_to_dashboard_2'=>date('Y-m-d'),
+          'date_from_dashboard_3'=>date('Y-m-d'),
+          'date_to_dashboard_3'=>date('Y-m-d'),
           'date_po_auto'=>date('Y-m-d'),
           'date_po_manual'=>date('Y-m-d'),
           'date_pemakaian'=>date('Y-m-d'),

@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <h5>Master Company</h5>
+    <h5>Please contact Vendor for more Company ID</h5>
   </div>
   <div class="card-block">
     <!-- Menampilkan notif !-->
