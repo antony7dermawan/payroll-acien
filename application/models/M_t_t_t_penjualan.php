@@ -412,6 +412,7 @@ public function select_range_date($from_date,$to_date,$kredit_logic,$sales_id,$p
     $this->db->where('T_T_T_PENJUALAN.ID',$id);
 
     $this->db->where("T_T_T_PENJUALAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
+    $this->db->where("T_M_D_COMPANY.POSTFIX_ID={$this->session->userdata('postfix_id')}");
     
 
     $akun = $this->db->get ();

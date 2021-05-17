@@ -242,7 +242,7 @@ public function select_range_date($from_date,$to_date)
 
     $this->db->where("T_T_T_RETUR_PENJUALAN.POSTFIX_ID={$this->session->userdata('postfix_id')}");
 
-    
+    $this->db->where("T_M_D_COMPANY.POSTFIX_ID={$this->session->userdata('postfix_id')}");
 
     $akun = $this->db->get ();
     return $akun->result ();
