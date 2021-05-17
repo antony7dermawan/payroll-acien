@@ -38,7 +38,7 @@ class Auth extends MY_Controller {
           'company_id'=>$user->COMPANY_ID,
           'postfix_id'=>$user->POSTFIX_ID,
           'master_barang_kategori_id'=>0,
-          'master_barang_company_id'=>1,
+          'master_barang_company_id'=>$user->COMPANY_ID,
           'date_pembelian'=>date('Y-m-d'),
           'date_penjualan'=>date('Y-m-d'),
           'date_retur_pembelian'=>date('Y-m-d'),
@@ -53,6 +53,7 @@ class Auth extends MY_Controller {
           'date_po_manual'=>date('Y-m-d'),
           'date_pemakaian'=>date('Y-m-d'),
           'date_retur_pemakaian'=>date('Y-m-d'),
+
           
 
 
