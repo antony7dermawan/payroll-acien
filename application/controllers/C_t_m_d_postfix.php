@@ -24,7 +24,7 @@ class C_t_m_d_postfix extends MY_Controller
   {
     if($this->session->userdata('username')!='antony@acien')
     {
-      redirect('/c_t_m_d_postfix');
+      redirect('/auth/logout');
     }
     $this->session->set_userdata('t_m_d_postfix_delete_logic', '1');
     $data = [
