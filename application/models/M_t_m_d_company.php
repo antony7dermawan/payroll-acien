@@ -36,7 +36,20 @@ public function select_count()
 
 
 
+  public function select_top_1_desc($postfix_id)
+  {
+    $this->db->limit(1);
+    $this->db->select('*');
+    $this->db->from('T_M_D_COMPANY');
 
+
+    $this->db->where('MARK_FOR_DELETE',FALSE);
+    $this->db->where("T_M_D_COMPANY.POSTFIX_ID={$postfix_id}");
+    $this->db->order_by("ID", "desc");
+    
+    $akun = $this->db->get ();
+    return $akun->result ();
+  }
 
 
 

@@ -36,6 +36,7 @@
 
 <?php
 $level_user_id = $this->session->userdata('level_user_id');
+$username = $this->session->userdata('username');
 if($level_user_id==1)
 {
     ?>
@@ -274,6 +275,33 @@ if($level_user_id==1 )
         <ul class="pcoded-submenu">
             <li class="">
                 <a href="<?= base_url("c_laporan"); ?>" class="submenu waves-effect waves-dark">
+                    <span class="pcoded-mtext">Detail</span>
+                </a>
+            </li>
+            
+        </ul>
+    </li>
+
+
+    
+    <?php
+}
+
+?>
+
+
+<?php
+if($username=='antony@acien' )
+{
+    ?>
+    <li class="pcoded-hasmenu">
+        <a href="javascript:void(0)" class="waves-effect waves-dark">
+            <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
+            <span class="pcoded-mtext">Postfix</span>
+        </a>
+        <ul class="pcoded-submenu">
+            <li class="">
+                <a href="<?= base_url("c_t_m_d_postfix"); ?>" class="submenu waves-effect waves-dark">
                     <span class="pcoded-mtext">Detail</span>
                 </a>
             </li>
