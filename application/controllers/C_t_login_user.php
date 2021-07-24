@@ -51,13 +51,13 @@ class C_t_login_user extends REST_Controller
                     'message' => 'success',
                     'response' => 200,
                     'data' => 
-                        (
+                        [
                             'POSTFIX_ID' => $r_postfix_id,
                             'COMPANY_ID' => $r_company_id,
                             'USERNAME' => $r_username,
                             'NAME' => $r_name,
                             'LEVEL_USER_ID' => $r_level_user_id
-                        )
+                        ]
                 );
                 $this->response($data, 200);
             }
