@@ -11,6 +11,9 @@ class C_t_m_d_postfix extends REST_Controller
 
     function __construct($config = 'rest')
     {
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        
         parent::__construct($config);
         $this->load->model('m_t_m_d_postfix');
         $this->load->database();
