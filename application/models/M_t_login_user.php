@@ -19,8 +19,8 @@ class M_t_login_user extends CI_Model {
 
     $this->db->join('T_M_D_COMPANY', 'T_M_D_COMPANY.ID = T_LOGIN_USER.COMPANY_ID', 'left');
 
-    $this->db->where("USERNAME='{$username}'");
-    $this->db->where('MARK_FOR_DELETE',false);
+    $this->db->where("T_LOGIN_USER.USERNAME='{$username}'");
+    $this->db->where('T_LOGIN_USER.MARK_FOR_DELETE',false);
 
     $akun = $this->db->get ();
     return $akun->result ();
