@@ -42,6 +42,7 @@ class C_t_login_user extends REST_Controller
           $r_level_user_id = $value->LEVEL_USER_ID;
           $r_company_id = $value->COMPANY_ID;
           $r_postfix_id = $value->POSTFIX_ID;
+          $r_company = $value->COMPANY;
         }
         if($r_username!='')
         {
@@ -56,7 +57,8 @@ class C_t_login_user extends REST_Controller
                             'COMPANY_ID' => $r_company_id,
                             'USERNAME' => $r_username,
                             'NAME' => $r_name,
-                            'LEVEL_USER_ID' => $r_level_user_id
+                            'LEVEL_USER_ID' => $r_level_user_id,
+                            'COMPANY' => $r_company
                         ]
                 );
                 $this->response($data, 200);
